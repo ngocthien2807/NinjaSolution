@@ -1,0 +1,72 @@
+﻿@model DTOs.ItemDTOs.ViewItem
+
+@{
+    ViewData["Title"] = "Vật phẩm";
+    <link rel="stylesheet" href="~/assets/css/info-items.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .input-text {
+            display: flex;
+        }
+
+            .input-text input {
+                width: 96%;
+            }
+
+        .input-lable {
+            width: 120px;
+            height: 40px;
+        }
+
+            .input-lable label {
+                height: 125px;
+                margin: 0 0 0 38px;
+                font-family: 'Playfair Display', serif;
+                /*color: #8d8d8d;*/
+                line-height: 1.7em;
+                font-size: 15px;
+                font-weight: lighter;
+                overflow: hidden;
+            }
+
+        .input-input input {
+            border: 0px;
+            font-size: 1rem;
+        }
+    </style>
+}
+
+<div class="container">
+    <div class="grid">
+        <div class="pokemon-list__header">
+            <div class="pokemon-list__load-more__button size-14">
+                <a asp-controller="Item" asp-action="Index"><span>Vật phẩm</span></a>
+            </div>
+            <div class="content" style="margin-top: -50px;">
+                <div class="wrapper">
+                    <div class="product-img">
+                        <img src="@Html.DisplayFor(model => model.LinkImage)"
+                             height="420" width="327">
+
+                    </div>
+                    <div class="product-info">
+                        <div class="product-text">
+                            <h1>@Html.DisplayFor(model => model.Name)</h1>
+                            <h2>@Html.DisplayFor(model => model.Description)</h2>
+                            <div class="input-text">
+                                <div class="input-lable">
+                                    <label for="">Số lượng: </label>
+                                </div>
+                                <div class="input-input">
+                                    <input type="text" placeholder="0" value="@Html.DisplayFor(model => model.Amount)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
