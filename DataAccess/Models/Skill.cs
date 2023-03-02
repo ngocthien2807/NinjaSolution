@@ -21,7 +21,6 @@ namespace DataAccess.Models
         public int Coin { get; set; }
         public int LevelUnlock { get; set; }
         public int UpdateCoin { get; set; }
-        public string MethodName { get; set; }
         public string Description { get; set; }
         public string LinkImage { get; set; }
         public bool Delete { get; set; }

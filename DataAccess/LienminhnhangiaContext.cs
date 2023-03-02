@@ -458,10 +458,6 @@ namespace DataAccess
 
                 entity.Property(e => e.LinkImage).HasColumnName("Link_image");
 
-                entity.Property(e => e.MethodName)
-                    .IsRequired()
-                    .HasColumnName("Method_Name");
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50);
