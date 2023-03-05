@@ -38,6 +38,7 @@ namespace AppServices.AccountRepo
             try
             {
                 var account = context.Accounts.SingleOrDefault(acc => acc.Username == login.Username && acc.Delete == false);
+                
                 if (account == null)
                 {
                     throw new Exception("Account does not exists.");
@@ -48,7 +49,9 @@ namespace AppServices.AccountRepo
                     throw new Exception("Password is wrong.");
                 }
 
-                return new Payload { AccountId = account.AccountId.ToString(), Role = account.Role };
+                var payload = mapper.Map<Account, Payload>(account);
+
+                return payload;
             }
             catch (Exception ex)
             {
@@ -72,23 +75,8 @@ namespace AppServices.AccountRepo
             }
         }
 
-        public AccountHeader Header(int accountId)
-        {
-            try
-            {
-                var account = context.Accounts.SingleOrDefault(acc => acc.AccountId == accountId && acc.Delete == false);
-                var header = mapper.Map<Account, AccountHeader>(account);
-
-                return header;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
         public bool Register(Account newAccount)
-        {
+        { 
             try
             {
                 var account = context.Accounts.SingleOrDefault(acc => acc.Username == newAccount.Username);

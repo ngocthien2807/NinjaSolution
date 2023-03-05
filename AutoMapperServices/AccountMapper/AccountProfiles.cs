@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DataAccess.Models;
 using DTOs.AccountDTOs;
+using Obj_Common;
 
 namespace AutoMapperServices.AccountMapper
 {
@@ -16,7 +17,7 @@ namespace AutoMapperServices.AccountMapper
 
             CreateMap<Account, AccountProfile>();
 
-            CreateMap<Account, AccountHeader>();
+            CreateMap<Account, Payload>();
         }
     }
 }

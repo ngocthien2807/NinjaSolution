@@ -32,7 +32,7 @@ namespace API_Common.Controllers
             {
                 Account account = mapper.Map<Register, Account>(register);
 
-                if (!AccountManager.Register(account)) 
+                if (!AccountManager.Register(account))
                     return StatusCode((int)HttpStatusCode.BadRequest, "Register fail!");
 
                 return StatusCode((int)HttpStatusCode.OK, "Register success");

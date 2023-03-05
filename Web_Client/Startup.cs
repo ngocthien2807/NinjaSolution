@@ -24,6 +24,7 @@ namespace Web_Client
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,11 +51,6 @@ namespace Web_Client
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapAreaControllerRoute(
-                   name: "areas",
-                   areaName: "Player",
-                   pattern: "Player/{controller=HomePlayer}/{action=Index}/{id?}");
-
                 endpoints.MapAreaControllerRoute(
                    name: "areas",
                    areaName: "Admin",

@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -69,7 +72,57 @@
                                 </button>
                             </div>
 
-                            <li class="nav-global__item" style="height: 57px;">
+                            @{
+
+                                var Avatar = HttpContextAccessor.HttpContext.Request.Cookies["Avatar"];
+                                var Name = HttpContextAccessor.HttpContext.Request.Cookies["Name"];
+
+                                if (Avatar == null || Name == null)
+                                {
+                                    <li class="nav-global__item" style="height: 57px;">
+                                        <div class="search_button">
+                                            @using (Html.BeginForm("Login", "Home", FormMethod.Get))
+                                            {
+                                                <button type="submit" class="sum">
+                                                    <span style=" font-size: 17px;line-height: 35px;">
+                                                        Login<br class="hidden-xs">
+                                                    </span>
+                                                </button>
+                                            }
+
+                                        </div>
+                                    </li>
+                                } else
+                                {
+                                    <li class="nav-global__item" style="height: 57px;">
+
+                                        <div style="margin-left: 20px;" class="avatar-img">
+                                            <div style="width: 50px; height: 50px;border: 1px solid #ccc2c2;border-radius: 50%;" class="avatar-img-items">
+                                                <img style="width: 100%;border-radius: 50%;"
+                                                     src="@Avatar" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="info-charac">
+                                            <div class="info-charac_items">
+                                                <a asp-controller="Home" asp-action="Profile">
+                                                    <i class="fa-sharp fa-solid fa-user-tie"></i>
+                                                    <span>Xem thông tin</span>
+                                                </a>
+                                            </div>
+                                           
+                                            <div style="position:relative;" class="info-charac_items">
+                                                <a asp-controller="Home" asp-action="Logout">
+                                                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                                    <span style="margin-top: -4px;">Đăng xuất</span>
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                }
+                            }
+
+                          @*  <li class="nav-global__item" style="height: 57px;">
                                 <div class="search_button">
                                     @using (Html.BeginForm("Login", "Home", FormMethod.Get))
                                     {
@@ -81,7 +134,7 @@
                                     }
                                     
                                 </div>
-                            </li>
+                            </li>*@
                         </ul>
 
                     </div>

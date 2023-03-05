@@ -25,10 +25,16 @@ namespace AppServices.JWTRepo
         {
             string accessToken = GenerateAccessToken(data);
             string refreshToken = GenerateRefreshToken();
-            return new Tokens { Access_Token = accessToken, Refresh_Token = refreshToken };
+            return new Tokens
+            {
+                Access_Token = accessToken,
+                Refresh_Token = refreshToken,
+                Name = data.Name,
+                Avatar = data.Avatar,
+            };
         }
 
-       
+
         public string GenerateRefreshToken()
         {
             try
@@ -74,7 +80,7 @@ namespace AppServices.JWTRepo
             }
         }
 
-        public bool ValidateToken(string token, ref ClaimsPrincipal principal)
+        public bool ValidateToken(string token, out Payload data)
         {
             try
             {
@@ -92,28 +98,31 @@ namespace AppServices.JWTRepo
                 };
 
                 SecurityToken validatedToken;
-                principal = tokenHandler.ValidateToken(token, validationParameters, out validatedToken);
+                var principal = tokenHandler.ValidateToken(token, validationParameters, out validatedToken);
+                data = null;
+                return true;
+            }
+            catch (SecurityTokenExpiredException ex)
+            {
+                // token has expired
+                var handler = new JwtSecurityTokenHandler();
+                var decodedToken = handler.ReadJwtToken(token);
 
-
-                //Check expiration token
-                var expirationTimeSeconds = principal.Claims.FirstOrDefault(c => c.Type == "exp")?.Value;
-                if (int.TryParse(expirationTimeSeconds, out int expirationTimeSecondsInt))
+                var sid = decodedToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid)?.Value;
+                var role = decodedToken.Claims.FirstOrDefault(c => c.Type == "role")?.Value;
+               
+                data = new Payload
                 {
-                    var expirationTimeUtc = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)
-                        .AddSeconds(expirationTimeSecondsInt);
-                    if (expirationTimeUtc <= DateTime.UtcNow) {
-                        return false; // token has expired
-                    } 
-                    
-                    return true;
-                }
+                    AccountId = sid,
+                    Role = (Role)Enum.Parse(typeof(Role), role)
+                };
+
+                return false;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-
-            return false;
         }
     }
 }

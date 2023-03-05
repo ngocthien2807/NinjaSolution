@@ -34,34 +34,27 @@ namespace Middleware.JWTMiddle
 
             try
             {
+                Payload data = new Payload();
+
                 // Validate the access token
-                var principal = new ClaimsPrincipal();
-                var accessToken_isValid = jWTManager.ValidateToken(accessToken, ref principal);
+                var accessToken_isValid = jWTManager.ValidateToken(accessToken, out data);
 
                 // Access token has expired
                 if (!accessToken_isValid)
                 {
-                    var refreshToken = context.Request.Headers["refreshToken"].FirstOrDefault();
+                    var refreshToken = context.Request.Headers["refresh"].FirstOrDefault();
                     if (refreshToken == null) ReturnUnauthorized(context);
 
                     // Validate the refresh token
-                    var principal_refreshToken = new ClaimsPrincipal();
-                    var refreshToken_isValid = jWTManager.ValidateToken(refreshToken, ref principal_refreshToken);
+                    Payload refreshToken_data = new Payload();
+                    var refreshToken_isValid = jWTManager.ValidateToken(refreshToken, out refreshToken_data);
 
                     if (!refreshToken_isValid) ReturnUnauthorized(context);
-
-                    // Renew the access token using the refresh token
-                    var sid = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid)?.Value;
-                    var role = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
-
-                    Payload data = new Payload
-                    {
-                        AccountId = sid,
-                        Role = (Role)Enum.Parse(typeof(Role), role)
-                    };
-
+                   
                     var newAccessToken = jWTManager.GenerateAccessToken(data);
-                    context.Response.Headers.Add("Authorization", "Bearer " + newAccessToken);
+                    context.Request.Headers["Authorization"] = "Bearer " + newAccessToken;
+
+                    context.Response.Headers.Add("Authorization", newAccessToken);
                 }        
             }
             catch (Exception)

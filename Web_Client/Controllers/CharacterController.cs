@@ -30,8 +30,8 @@ namespace Web_Client.Controllers
             {
                 PropertyNameCaseInsensitive = true,
             };
-            List<ViewCharacter> bosses = JsonSerializer.Deserialize<List<ViewCharacter>>(strData, options);
-            return View(bosses);
+            List<ViewCharacter> characters = JsonSerializer.Deserialize<List<ViewCharacter>>(strData, options);
+            return View(characters);
         }
 
         public async Task<IActionResult> GetbyID(string Id)

@@ -1,0 +1,190 @@
+﻿@model DTOs.AccountDTOs.AccountProfile
+@{
+    <link rel="stylesheet" href="~/assets/css/info-items.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .input-text {
+            display: flex;
+        }
+
+            .input-text input {
+                width: 96%;
+            }
+
+        .input-lable {
+            width: 100px;
+            height: 40px;
+        }
+
+            .input-lable label {
+                height: 125px;
+                margin: 0 0 0 20px;
+                font-family: 'Playfair Display', serif;
+                color: #8d8d8d;
+                line-height: 1.7em;
+                font-size: 15px;
+                font-weight: lighter;
+                overflow: hidden;
+            }
+
+        .input-input {
+            display: flex;
+        }
+
+        .input-icon {
+            margin-left: 20px;
+        }
+
+        .input-input i {
+            font-size: 1rem;
+            align-items: center;
+            margin-right: 10px;
+        }
+
+        .input-input {
+            align-items: center;
+        }
+
+        .input-gmail p {
+            margin-left: 2px;
+        }
+
+        .input-input input {
+            border: 0px;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+        .info-input {
+            margin-top: -30px;
+        }
+
+        .product-price-btn {
+            width: 0px;
+            height: 0px;
+        }
+    </style>
+}
+<div class="container">
+    <div class="grid">
+        <div class="grid__row">
+            <div class="container">
+                <div class="grid">
+                    <div style="z-index: 0;" class="pokemon-list__header">
+                        <div style="margin-top: -20px;" class="pokemon-list__load-more__button size-14">
+                            <a href="/character.html"><span>Thông tin</span></a>
+                        </div>
+                        <div class="content" style="margin-top: -70px;">
+                            <div class="wrapper">
+                                <div class="product-img">
+                                    <img src="@Model.Avatar" height="420" width="327">
+                                    <div class="product-img-item">
+                                        <div class="add-btn" style="margin-left:20px; margin-top:20px;">
+                                            <button class="btn1"><i class="fa-solid fa-plus"></i><span> Thêm</span></button>
+                                            <button class="btn2"><i class="fa-solid fa-wrench"></i><span> Sửa</span></button>
+                                            <button class="btn3"><i class="fa-solid fa-trash"></i><span> Xóa</span></button>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-text">
+                                        <h1>Thông tin tài khoản</h1>
+                                        
+                                        <div class="info-input">
+                                            <div class="input-text">
+                                                <div class="input-lable">
+                                                    <label for="">Tên tài khoản: </label>
+                                                </div>
+                                                <div class="input-input">
+                                                    <div class="input-gmail">
+                                                        <p style="height: 20px;margin-top: 3px;">@Model.Name</p>
+                                                    </div>
+                                                    <div class="input-icon">
+                                                        <a href="./chage-pass.html">
+                                                            <i class="fa-solid fa-pen"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="input-text">
+                                                <div class="input-lable">
+                                                    <label for="">Tên đăng nhập: </label>
+                                                </div>
+                                                <div class="input-input">
+                                                    <div class="input-gmail">
+                                                        <p style="height: 20px;margin-top: 3px;">@Model.Username</p>
+                                                    </div>
+                                                    <div class="input-icon">
+                                                        <a href="./chage-pass.html">
+                                                            <i class="fa-solid fa-pen"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="input-text">
+                                                <div class="input-lable">
+                                                    <label for="">Số xu: </label>
+                                                </div>
+                                                <div class="input-input">
+                                                    <div class="input-gmail">
+                                                        <p style="height: 20px;margin-top: 3px;">@Model.Coin</p>
+                                                    </div>
+                                                    <div class="input-icon">
+                                                        <a href="./chage-pass.html">
+                                                            <i class="fa-solid fa-pen"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="input-text">
+                                                <div class="input-lable">
+                                                    <label for="">Kinh nghiệm: </label>
+                                                </div>
+                                                <div class="input-input">
+                                                    <div class="input-gmail">
+                                                        <p style="height: 20px;margin-top: 3px;">@Model.Experience</p>
+                                                    </div>
+                                                    <div class="input-icon">
+                                                        <a href="./chage-pass.html">
+                                                            <i class="fa-solid fa-pen"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="input-text">
+                                                <div class="input-lable">
+                                                    <label for="">Level: </label>
+                                                </div>
+                                                <div class="input-input">
+                                                    <div class="input-gmail">
+                                                        <p style="height: 20px;margin-top: 3px;">@Model.Level</p>
+                                                    </div>
+                                                    <div class="input-icon">
+                                                        <a href="./chage-pass.html">
+                                                            <i class="fa-solid fa-pen"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <a href="/chage-pass.html">
+                                        <div style="margin-top: 50px;" class="product-price-btn">
+                                            <div>
+                                                <button type="button">Đổi mật khẩu</button>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

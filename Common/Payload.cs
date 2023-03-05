@@ -8,7 +8,11 @@ namespace Obj_Common
 {
     public class Payload
     {
+        public Payload() { }
+
         public string AccountId { get; set; }
         public Role Role { get; set; }
+        public string Name { get; set; }
+        public string Avatar { get; set; }
     }
 }

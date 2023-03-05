@@ -1,22 +1,28 @@
 ﻿using DTOs.AccountDTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using Obj_Common;
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Net.Mime;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Web_Client.Models;
 
 namespace Web_Client.Controllers
 {
     public class HomeController : Controller
     {
         private readonly HttpClient client = null;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public HomeController()
+        public HomeController(IHttpContextAccessor httpContextAccessor)
         {
+            _httpContextAccessor = httpContextAccessor;
             client = new HttpClient();
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
             client.DefaultRequestHeaders.Accept.Add(contentType);
@@ -65,9 +71,10 @@ namespace Web_Client.Controllers
 
             Response.Cookies.Append("access", tokens.Access_Token, CookieOptions);
             Response.Cookies.Append("refresh", tokens.Refresh_Token, CookieOptions);
-            Response.Cookies.Append("isLogin", "true", CookieOptions);
+            Response.Cookies.Append("Avatar", tokens.Avatar, CookieOptions);
+            Response.Cookies.Append("Name", tokens.Name, CookieOptions);
 
-            return RedirectToAction("Index", "HomePlayer", new { area = "Player" });
+            return RedirectToAction(nameof(Index));
         }
 
 
@@ -89,6 +96,49 @@ namespace Web_Client.Controllers
             }
             
             return RedirectToAction(nameof(Login));
+        }
+
+        public async Task<IActionResult> Profile()
+        {
+            string access = Request.Cookies["access"];
+            string refresh = Request.Cookies["refresh"];
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", access);
+            client.DefaultRequestHeaders.Add("refresh", refresh);
+
+            HttpResponseMessage response = await client.GetAsync(Route.Profile);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                //ModelState.AddModelError("ErrorMessage", "Đăng kí không thành công.");
+                return View();
+            }
+
+            string strData = await response.Content.ReadAsStringAsync();
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
+            var profile = JsonSerializer.Deserialize<AccountProfile>(strData, options);
+
+            //var headerValue = response.Headers.GetValues("Authorization").FirstOrDefault();
+
+            new resetCookie().reset(_httpContextAccessor, response);
+
+            return View(profile);
+        }
+
+       
+
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete("access");
+            Response.Cookies.Delete("refresh");
+            Response.Cookies.Delete("Avatar");
+            Response.Cookies.Delete("Name");
+
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

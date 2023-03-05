@@ -9,7 +9,9 @@ namespace Obj_Common
 {
     public class Tokens
     {
-        [Required] public string Access_Token { get; set; }
-        [Required] public string Refresh_Token { get; set; }
+        public string Name { get; set; }
+        public string Avatar { get; set; }
+        public string Access_Token { get; set; }
+        public string Refresh_Token { get; set; }
     }
 }
