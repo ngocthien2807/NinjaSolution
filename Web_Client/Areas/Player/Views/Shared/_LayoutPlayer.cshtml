@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model DTOs.AccountDTOs.AccountHeader
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -18,7 +20,7 @@
             <div class="global-header__body">
                 <div class="global-header__title">
                     <h1 class="global-header__site-name">
-                        <a asp-controller="Home" asp-action="Index" >
+                        <a asp-controller="Home" asp-action="Index">
                             <img src="~/assets/img/logo_web.png"
                                  alt="Hoc vien ninja" width="130">
                         </a>
@@ -28,7 +30,7 @@
                     <div class="nav-global__body">
                         <ul class="nav-global__list">
                             <li class="nav-global__item" style="height: 57px;">
-                                <a asp-controller="Home"  asp-action="HowToPlay"
+                                <a asp-controller="Home" asp-action="HowToPlay"
                                    class="nav-global__item--goods"><span>Giới thiệu</span></a>
                             </li>
 
@@ -46,7 +48,7 @@
                                 <a asp-controller="Boss" asp-action="Index"
                                    class="nav-global__item--event"><span>Boss</span></a>
                             </li>
-                          
+
                             <li class="nav-global__item" style="height: 57px;">
                                 <a asp-controller="Ability" asp-action="Index"
                                    class="nav-global__item--game"><span>Nội tại</span></a>
@@ -69,19 +71,35 @@
                                 </button>
                             </div>
 
+
+
                             <li class="nav-global__item" style="height: 57px;">
-                                <div class="search_button">
-                                    @using (Html.BeginForm("Login", "Home", FormMethod.Get))
-                                    {
-                                        <button type="submit" class="sum">
-                                            <span style=" font-size: 17px;line-height: 35px;">
-                                                Login<br class="hidden-xs">
-                                            </span>
-                                        </button>
-                                    }
-                                    
+
+                                <div style="margin-left: 20px;" class="avatar-img">
+                                    <div style="width: 50px; height: 50px;border: 1px solid #ccc2c2;border-radius: 50%;" class="avatar-img-items">
+                                        <img style="width: 100%;border-radius: 50%;"
+                                             src="@Model.Avatar" alt="">
+                                    </div>
+                                </div>
+                                <div class="info-charac">
+                                    <div class="info-charac_items">
+                                        <a href="/admin.html">
+                                            <i class="fa-sharp fa-solid fa-user-tie"></i>
+                                            <span>infomation</span>
+                                        </a>
+                                    </div>
+                                    <div style="position:relative;" class="info-charac_items">
+                                        <a href="">
+                                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                            <span style="margin-top: -4px;">logout</span>
+                                        </a>
+                                    </div>
+
                                 </div>
                             </li>
+
+
+
                         </ul>
 
                     </div>
@@ -98,7 +116,6 @@
 
     <div id="footer" data-v-514bccfc="">
         <div class="container" data-v-514bccfc="">
-            <!---->
             <div class="bottom" data-v-514bccfc="">
                 <div class="logos" data-v-514bccfc="">
                     <img src="./assets/img/logo_web.png" alt="">
@@ -114,7 +131,6 @@
                         Điện thoại: (04)982 123 324;
                     </div>
                     <div class="social-links" data-v-514bccfc="">
-                        <!---->
                         <div class="links" data-v-514bccfc="">
                             <a href="javascript:void(0)" target="_blank" rel="noreferrer noopener"
                                class="link" data-v-514bccfc="">
@@ -135,7 +151,6 @@
                            data-v-514bccfc="">CHƠI MIỄN PHÍ</a> <span class="age-limit" data-v-514bccfc=""></span>
                     </div>
                 </div>
-                <!---->
             </div>
         </div>
     </div>

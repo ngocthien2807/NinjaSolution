@@ -1,7 +1,6 @@
 ﻿using DTOs.AccountDTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 using Obj_Common;
 using System;
 using System.Net.Http;
@@ -66,9 +65,9 @@ namespace Web_Client.Controllers
 
             Response.Cookies.Append("access", tokens.Access_Token, CookieOptions);
             Response.Cookies.Append("refresh", tokens.Refresh_Token, CookieOptions);
+            Response.Cookies.Append("isLogin", "true", CookieOptions);
 
-            return RedirectToAction(nameof(Index));
-
+            return RedirectToAction("Index", "HomePlayer", new { area = "Player" });
         }
 
 

@@ -1,4 +1,5 @@
-﻿using DataAccess;
+﻿using AutoMapper;
+using DataAccess;
 using DataAccess.Models;
 using DTOs.AccountDTOs;
 using Obj_Common;
@@ -11,10 +12,12 @@ namespace AppServices.AccountRepo
     public class AccountRepositories
     {
         private readonly LienminhnhangiaContext context;
+        IMapper mapper;
 
-        public AccountRepositories(LienminhnhangiaContext context)
+        public AccountRepositories(LienminhnhangiaContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
         public List<Account> GetAllAccount()
@@ -54,11 +57,29 @@ namespace AppServices.AccountRepo
            
         }
 
-        public Account Profile(int accountId)
+        public AccountProfile Profile(int accountId)
         {
             try
             {
-                return context.Accounts.SingleOrDefault(acc => acc.AccountId == accountId && acc.Delete == false);
+                var account = context.Accounts.SingleOrDefault(acc => acc.AccountId == accountId && acc.Delete == false);
+                var profile = mapper.Map<Account, AccountProfile>(account);
+
+                return profile;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public AccountHeader Header(int accountId)
+        {
+            try
+            {
+                var account = context.Accounts.SingleOrDefault(acc => acc.AccountId == accountId && acc.Delete == false);
+                var header = mapper.Map<Account, AccountHeader>(account);
+
+                return header;
             }
             catch (Exception ex)
             {

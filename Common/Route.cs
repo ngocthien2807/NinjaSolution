@@ -23,6 +23,7 @@
     {
         public static string Login = $"{ApiUrl.BaseUrlCommon}/{ApiController.Account}/Login";
         public static string Register = $"{ApiUrl.BaseUrlCommon}/{ApiController.Account}/Register";
+        public static string Header = $"{ApiUrl.BaseUrlPlayer}/{ApiController.Account}/Header";
 
 
         public static string getAllAbility = $"{ApiUrl.BaseUrlCommon}/{ApiController.Ability}/GetAllAbility";

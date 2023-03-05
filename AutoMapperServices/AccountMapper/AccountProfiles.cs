@@ -13,6 +13,10 @@ namespace AutoMapperServices.AccountMapper
             CreateMap<UpdateProfile, Account>();
 
             CreateMap<UpdateGameSpecs, Account>();
+
+            CreateMap<Account, AccountProfile>();
+
+            CreateMap<Account, AccountHeader>();
         }
     }
 }

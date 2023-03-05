@@ -45,6 +45,25 @@ namespace API_Player.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult Header()
+        {
+            try
+            {
+                string id = User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Sid)?.Value;
+                var account = AccountManager.Header(int.Parse(id));
+
+                if (account == null)
+                    return StatusCode((int)HttpStatusCode.BadRequest, "Account does not exists.");
+
+                return StatusCode((int)HttpStatusCode.OK, account);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.NotFound, ex.Message);
+            }
+        }
+
         [HttpPut]
         public IActionResult UpdateProfile(UpdateProfile updateAccount)
         {

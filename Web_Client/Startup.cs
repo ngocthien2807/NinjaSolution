@@ -46,21 +46,26 @@ namespace Web_Client
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                  name: "areas",
-                  pattern: "Admin/{controller=HomeAdmin}/{action=Index}/{id?}"
-                );
-            });
 
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapAreaControllerRoute(
+                   name: "areas",
+                   areaName: "Player",
+                   pattern: "Player/{controller=HomePlayer}/{action=Index}/{id?}");
+
+                endpoints.MapAreaControllerRoute(
+                   name: "areas",
+                   areaName: "Admin",
+                   pattern: "Admin/{controller=HomeAdmin}/{action=Index}/{id?}");
+
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+               
             });
         }
-    }                                   
+    }
 }
