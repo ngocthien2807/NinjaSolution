@@ -1,5 +1,6 @@
 ﻿using DataAccess;
 using DataAccess.Models;
+using DTOs.CharacterDTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -59,11 +60,16 @@ namespace AppServices.MonsterRepo
             }
         }
 
-        public List<Monster> GetAllMonster()
+        public List<Monster> GetAllMonster(int? total)
         {
             try
             {
+                if (total != null)
+                {
+                    return context.Monsters.Where(i => i.Delete == false).Take((int)total).ToList(); ;
+                }
                 return context.Monsters.Where(i => i.Delete == false).ToList();
+
             }
             catch (Exception ex)
             {

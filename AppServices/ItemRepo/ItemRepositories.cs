@@ -66,10 +66,14 @@ namespace AppServices.ItemRepo
             }
         }
 
-        public List<Item> GetAllItem()
+        public List<Item> GetAllItem(int? total)
         {
             try
             {
+                if (total != null)
+                {
+                    return context.Items.Where(i => i.Delete == false).Take((int)total).ToList(); ;
+                }
                 return context.Items.Where(i => i.Delete == false).ToList();
             }
             catch (Exception ex)

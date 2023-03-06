@@ -69,12 +69,18 @@ namespace AppServices.CharacterRepo
             }
         }
 
-        public List<ViewCharacter> GetAllCharacter()
+        public List<ViewCharacter> GetAllCharacter(int? total)
         {
             try
             {
                 var characters = context.Characters.Where(cha => cha.Delete == false).ToList();
                 var viewCharacters = mapper.Map<List<Character>, List<ViewCharacter>>(characters);
+               
+                if (total != null)
+                {
+                    viewCharacters =viewCharacters.Take((int)total).ToList(); ;
+                }
+
                 return viewCharacters;
             }
             catch (Exception ex)

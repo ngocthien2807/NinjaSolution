@@ -18,11 +18,11 @@ namespace API_Common.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllCharacter()
+        public IActionResult GetAllCharacter(int? total)
         {
             try
             {
-                return StatusCode((int)HttpStatusCode.OK, CharacterManager.GetAllCharacter());
+                return StatusCode((int)HttpStatusCode.OK, CharacterManager.GetAllCharacter(total));
             }
             catch (Exception ex)
             {

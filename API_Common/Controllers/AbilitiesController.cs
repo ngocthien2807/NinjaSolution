@@ -18,11 +18,11 @@ namespace API_Common.Controllers
 
 
         [HttpGet]
-        public IActionResult GetAllAbility()
+        public IActionResult GetAllAbility(int? total)
         {
             try
             {
-                return StatusCode((int)HttpStatusCode.OK, AbilityManager.GetAllAbility());
+                return StatusCode((int)HttpStatusCode.OK, AbilityManager.GetAllAbility(total));
             }
             catch (Exception ex)
             {

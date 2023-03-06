@@ -1,6 +1,173 @@
-﻿@{
+﻿@using Obj_Common;
+@{
     ViewData["Title"] = "Trang chủ";
 }
+<script>
+    $(document).ready(function () {
+        getCharacter();
+        getMonster();
+        getBoss();
+        getAbility();
+        getItem();
+
+    });
+
+    function getCharacter() { 
+        var content = '';
+        $.ajax({
+            type: "GET",
+            url: '@Route.getAllCharacter' + "?total=5",
+            success: function (data) {
+
+                $.each(data, function (index, v) {
+                    content += `
+                                    <li class="product-list-1">
+                                        <div class="avata">
+                                            <div class="avata__img">
+                                                <img src="${v.linkImage}" alt="" class="imgs">
+                                            </div>
+                                            <div class="title">
+                                                    <a href='/Character/GetbyID/${v.characterId}' class="btn">${v.name} </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                `
+                });
+
+                $('#list_character').html(content);
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+              
+            }
+        });
+    }
+
+    function getMonster() {
+        var content = '';
+        $.ajax({
+            type: "GET",
+            url: '@Route.getAllMonster' + "?total=5",
+            success: function (data) {
+
+                $.each(data, function (index, v) {
+                    content += `
+                                    <li class="product-list-1">
+                                        <div class="avata">
+                                            <div class="avata__img">
+                                                <img src="${v.linkImage}" alt="" class="imgs">
+                                            </div>
+                                            <div class="title">
+                                                    <a href='/Monster/GetbyID/${v.monsterId}' class="btn">${v.name} </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                `
+                });
+
+                $('#list_monter').html(content);
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+               
+            }
+        });
+    }
+
+    function getBoss() {
+        var content = '';
+        $.ajax({
+            type: "GET",
+            url: '@Route.getAllBoss' + "?total=5",
+            success: function (data) {
+
+                $.each(data, function (index, v) {
+                    content += `
+                                        <li class="product-list-1">
+                                            <div class="avata">
+                                                <div class="avata__img">
+                                                    <img src="${v.linkImage}" alt="" class="imgs">
+                                                </div>
+                                                <div class="title">
+                                                        <a href='/Boss/GetbyID/${v.bossId}' class="btn">${v.name} </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    `
+                });
+
+                $('#list_boss').html(content);
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+    }
+
+    function getAbility() {
+        var content = '';
+        $.ajax({
+            type: "GET",
+            url: '@Route.getAllAbility' + "?total=5",
+            success: function (data) {
+
+                $.each(data, function (index, v) {
+                    content += `
+                                    <li class="product-list-1">
+                                        <div class="avata">
+                                            <div class="avata__img">
+                                                <img src="${v.linkImage}" alt="" class="imgs">
+                                            </div>
+                                            <div class="title">
+                                                <a href='/Ability/GetbyID/${v.abilityId}' class="btn">${v.name} </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                `
+                });
+
+                $('#list_ability').html(content);
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+    }
+
+    function getItem() {
+        var content = '';
+        $.ajax({
+            type: "GET",
+            url: '@Route.getAllItem' + "?total=5",
+            success: function (data) {
+
+                $.each(data, function (index, v) {
+                    content += `
+                                        <li class="product-list-1">
+                                            <div class="avata">
+                                                <div class="avata__img">
+                                                    <img src="${v.linkImage}" alt="" class="imgs">
+                                                </div>
+                                                <div class="title">
+                                                    <a href='/Ability/GetbyID/${v.itemId}' class="btn">${v.name} </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    `
+                });
+
+                $('#list_item').html(content);
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+    }
+
+</script>
 
 <div class="container">
     <div class="grid">
@@ -14,148 +181,109 @@
                 <div class="banner_naruto">
                     <img class="banner_naruto-img" src="~/assets/img/banner naruto.png" alt="">
                 </div>
-                <div class="content">
-                    <ul class="product-list">
-                        <li class="product-list-1">
-                            <div class="avata">
-                                <div class="avata__img">
-                                    <img src="~/assets/img/naruto.jfif" alt="" class="imgs">
-                                </div>
-                                <div class="title">
-                                    <a href="./info-character.html" class="btn">Naruto </a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="product-list-1">
-                            <div class="avata">
-                                <div class="avata__img">
-                                    <img src="https://tse3.mm.bing.net/th?id=OIP.BfWze12GXeMC11207Mre9gHaKX&pid=Api&P=0"
-                                         alt="" class="imgs">
-                                </div>
-                                <div class="title">
-                                    <a class="btn">Sakura </a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="product-list-1">
-                            <div class="avata">
-                                <div class="avata__img">
-                                    <img src="https://i.pinimg.com/736x/10/8b/04/108b04967ce6aa643e0caea0f8d99f94.jpg"
-                                         alt="" class="imgs">
-                                </div>
-                                <div class="title">
-                                    <a class="btn">Sasuke </a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="product-list-1">
-                            <div class="avata">
-                                <div class="avata__img">
-                                    <img src="https://i.pinimg.com/736x/16/ff/42/16ff42567816c25761b94857bfd0b636--naruto-uzumaki-anime-naruto.jpg"
-                                         alt="" class="imgs">
-                                </div>
-                                <div class="title">
-                                    <a class="btn">Hashirama </a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="product-list-1">
-                            <div class="avata">
-                                <div class="avata__img">
-                                    <img src="https://i.pinimg.com/736x/a7/b1/e1/a7b1e18c4b83d3b32730a3155d966511.jpg"
-                                         alt="" class="imgs">
-                                </div>
-                                <div class="title">
-                                    <a class="btn">Madara </a>
-                                </div>
-                            </div>
-                        </li>
 
+                <div class="content">
+                    <ul class="product-list" id="list_character">
                     </ul>
+
                     <div style="display: flex; justify-content: center">
 
                         <div class="xemthembtb" data-v-514bccfc="">
-                            <a style="color: #fff;     margin-left: 48px;" href="/character.html"
-                               class="playForFree" data-v-514bccfc="">Xem thêm</a> <span class="age-limit"
-                                                                                         data-v-514bccfc=""></span>
+                            <a style="color: #fff;     margin-left: 48px;"
+                               asp-controller="Character" asp-action="Index"
+                               class="playForFree" data-v-514bccfc="">Xem thêm</a>
+
+                            <span class="age-limit" data-v-514bccfc=""></span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="pokemon-list__header">
-                <div class="pokemon-list__load-more__button size-14"><span>Nhân vật</span></div>
+                <div class="pokemon-list__load-more__button size-14"><span>Quái vật</span></div>
                 <div class="banner_nagato">
                     <img class="banner_naruto-img" src="/assets/img/nagato banner.png" alt="">
                 </div>
                 <div class="content">
-                    <ul class="product-list">
-                        <li class="product-list-1">
-                            <div class="avata">
-                                <div class="avata__img">
-                                    <img src="~/assets/img/naruto.jfif" alt="" class="imgs">
-                                </div>
-                                <div class="title">
-                                    <a class="btn">Naruto </a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="product-list-1">
-                            <div class="avata">
-                                <div class="avata__img">
-                                    <img src="https://tse3.mm.bing.net/th?id=OIP.BfWze12GXeMC11207Mre9gHaKX&pid=Api&P=0"
-                                         alt="" class="imgs">
-                                </div>
-                                <div class="title">
-                                    <a class="btn">Sakura </a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="product-list-1">
-                            <div class="avata">
-                                <div class="avata__img">
-                                    <img src="https://i.pinimg.com/736x/10/8b/04/108b04967ce6aa643e0caea0f8d99f94.jpg"
-                                         alt="" class="imgs">
-                                </div>
-                                <div class="title">
-                                    <a class="btn">Sasuke </a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="product-list-1">
-                            <div class="avata">
-                                <div class="avata__img">
-                                    <img src="https://i.pinimg.com/736x/16/ff/42/16ff42567816c25761b94857bfd0b636--naruto-uzumaki-anime-naruto.jpg"
-                                         alt="" class="imgs">
-                                </div>
-                                <div class="title">
-                                    <a class="btn">Hashirama </a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="product-list-1">
-                            <div class="avata">
-                                <div class="avata__img">
-                                    <img src="https://i.pinimg.com/736x/a7/b1/e1/a7b1e18c4b83d3b32730a3155d966511.jpg"
-                                         alt="" class="imgs">
-                                </div>
-                                <div class="title">
-                                    <a class="btn">Madara </a>
-                                </div>
-                            </div>
-                        </li>
-
+                    <ul class="product-list" id="list_monter">
                     </ul>
                     <div style="display: flex; justify-content: center">
 
                         <div class="xemthembtb" data-v-514bccfc="">
-                            <a style="color: #fff;     margin-left: 48px;" href="/boss.html" class="playForFree"
-                               data-v-514bccfc="">Xem thêm</a> <span class="age-limit"
-                                                                     data-v-514bccfc=""></span>
+                            <a style="color: #fff;     margin-left: 48px;"
+                               asp-controller="Monster" asp-action="Index"
+                               class="playForFree" data-v-514bccfc="">Xem thêm</a>
+
+                            <span class="age-limit" data-v-514bccfc=""></span>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="pokemon-list__header">
+                <div class="pokemon-list__load-more__button size-14"><span>Boss</span></div>
+                <div class="banner_nagato">
+                    <img class="banner_naruto-img" src="/assets/img/nagato banner.png" alt="">
+                </div>
+                <div class="content">
+                    <ul class="product-list" id="list_boss">
+                    </ul>
+                    <div style="display: flex; justify-content: center">
+
+                        <div class="xemthembtb" data-v-514bccfc="">
+                            <a style="color: #fff;     margin-left: 48px;"
+                               asp-controller="Boss" asp-action="Index"
+                               class="playForFree" data-v-514bccfc="">Xem thêm</a>
+
+                            <span class="age-limit" data-v-514bccfc=""></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pokemon-list__header">
+                <div class="pokemon-list__load-more__button size-14"><span>Nội tại</span></div>
+                <div class="banner_nagato">
+                    <img class="banner_naruto-img" src="/assets/img/nagato banner.png" alt="">
+                </div>
+                <div class="content">
+                    <ul class="product-list" id="list_ability">
+                    </ul>
+                    <div style="display: flex; justify-content: center">
+
+                        <div class="xemthembtb" data-v-514bccfc="">
+                            <a style="color: #fff;     margin-left: 48px;"
+                               asp-controller="Ability" asp-action="Index"
+                               class="playForFree" data-v-514bccfc="">Xem thêm</a>
+
+                            <span class="age-limit" data-v-514bccfc=""></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="pokemon-list__header">
+                <div class="pokemon-list__load-more__button size-14"><span>Vật phẩm</span></div>
+                <div class="banner_nagato">
+                    <img class="banner_naruto-img" src="/assets/img/nagato banner.png" alt="">
+                </div>
+                <div class="content">
+                    <ul class="product-list" id="list_item">
+                    </ul>
+                    <div style="display: flex; justify-content: center">
+
+                        <div class="xemthembtb" data-v-514bccfc="">
+                            <a style="color: #fff;     margin-left: 48px;"
+                               asp-controller="Item" asp-action="Index"
+                               class="playForFree" data-v-514bccfc="">Xem thêm</a>
+
+                            <span class="age-limit" data-v-514bccfc=""></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
 

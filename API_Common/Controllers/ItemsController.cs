@@ -24,11 +24,11 @@ namespace API_Common.Controllers
 
 
         [HttpGet]
-        public IActionResult GetAllItem()
+        public IActionResult GetAllItem(int? total)
         {
             try
             {
-                var items = ItemManager.GetAllItem();
+                var items = ItemManager.GetAllItem(total);
 
                 if(items.Count == 0) return StatusCode((int)HttpStatusCode.NoContent);
 

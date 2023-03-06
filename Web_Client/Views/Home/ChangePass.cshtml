@@ -59,49 +59,76 @@
 
 </style>
 
-@*<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-*@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        $("#Pass").focusout(function () {
+            if ($(this).val() == "") {
+                $("#password-error").show();
+            } else {
+                $("#password-error").hide();
+            }
+        });
 
+        $("#ConfirmPass").focusout(function () {
+            if ($(this).val() == "") {
+                $("#confirmPass-error").show();
+            } else {
+                $("#confirmPass-error").hide();
+            }
+        });
 
+        $("#changPass").click(function (e) {
+            var check = validation();
 
-        $("#saveProfile").click(function (e) {
-            //e.preventDefault(); // Prevent default form submit
+            if(check) {
+                var data = {
+                    "password": $("#Pass").val()
+                };
 
-            var data = {
-                "avatar": $('#avatar').attr('src'),
-                "name": $('#Name').val()
-            };
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("UpdateProfile", "Home")',
+                    data: data,
+                    success: function (data) {
+                        // Show success message
+                        alert('Password updated successfully!');
 
-            var access = $.cookie("access");
-            var refresh = $.cookie("refresh");
+                        // Reload the page
+                        location.reload();
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert("Failed to update password. Error: " + errorThrown);
+                    }
+                });
+            }
 
-            $.ajax({
-                type: "PUT",
-                url: "@Route.UpdateProfile",
-                data: JSON.stringify(data),
-                headers: {
-                    "Authorization": "Bearer " + access,// Get token from wherever you stored it
-                    "refresh": refresh
-                },
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data) {
-                    // Show success message
-                    alert('Profile updated successfully!');
-
-                    // Reload the page
-                    location.reload();
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert("Failed to update profile. Error: " + errorThrown);
-                }
-            });
+           
         });
     });
+
+
+    function validation(){
+        var password = $('#Pass').val()
+        var confirmPass = $('#ConfirmPass').val()
+
+        if (password == "" || confirmPass == "") {
+            if (confirmPass == "") $("#confirmPass-error").show();
+            if (password == "") $("#password-error").show();
+            return false;
+        }
+       
+      
+        if (password != "" && confirmPass != "" && password != confirmPass) {
+            $("#confirmPass-error").hide();
+            $("#password-error").hide();
+            $('#error').show();
+            return false;
+        }
+
+        return true;
+
+    }
 </script>
 
 
@@ -111,14 +138,10 @@
             <div class="container">
                 <div class="grid">
                     <div style="z-index: 0;" class="pokemon-list__header">
-
                         <div class="content">
                             <div class="wrapper">
-
-
                                 <div class="product-text" style="width: auto !important; text-align: center">
                                     <h1 id="title" style="margin-bottom: 20px; margin-left: 0px">Thay đổi mật khẩu</h1>
-
                                     <div class="info-input">
                                         <div class="input-text">
                                             <div class="input-lable">
@@ -126,33 +149,31 @@
                                             </div>
                                             <div class="input-input">
                                                 <div class="input-gmail">
-
                                                     <input id="Pass" style="height: 20px;margin-top: 3px;" />
-
                                                 </div>
-
                                             </div>
                                         </div>
+
+                                        <span id="password-error" style="color: red; font-size: 1rem; display: none;">Mật khẩu không được để trống.</span>
+                                        
                                         <div class="input-text">
                                             <div class="input-lable">
                                                 <label for="">Nhập lại mật khẩu: </label>
                                             </div>
                                             <div class="input-input">
                                                 <div class="input-gmail">
-
-                                                    <input id="Pass" style="height: 20px;margin-top: 3px;" />
-
+                                                    <input id="ConfirmPass" style="height: 20px;margin-top: 3px;" />
                                                 </div>
-
                                             </div>
+                                            
                                         </div>
+                                        <span id="confirmPass-error" style="color: red; font-size: 1rem; display: none;">Nhập lại mật khẩu không được để trống.</span>
+                                        <span id="error" style="color: red; font-size: 1rem; display: none;">Nhập lại mật khẩu không trùng khớp</span>
                                     </div>
                                 </div>
 
                                 <div class="product-price-btn">
-
-                                    <button id="changeProfile" style="margin-left: 14.5rem !important; " type="button">Lưu</button>
-
+                                    <button id="changPass" style="margin-left: 14.5rem !important; " type="button">Lưu</button>
                                 </div>
                             </div>
                         </div>

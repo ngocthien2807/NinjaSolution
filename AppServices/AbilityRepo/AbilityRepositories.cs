@@ -58,11 +58,13 @@ namespace AppServices.AbilityRepo
             }
         }
 
-        public List<Ability> GetAllAbility()
+        public List<Ability> GetAllAbility(int? total)
         {
-            var list = new List<Ability>();
             try
             {
+                if(total != null) 
+                    return context.Abilities.Where(i => i.Delete == false).Take((int)total).ToList();
+
                 return context.Abilities.Where(i => i.Delete == false).ToList();
             }
             catch (Exception ex)

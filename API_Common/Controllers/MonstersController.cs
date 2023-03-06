@@ -17,11 +17,11 @@ namespace API_Common.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllMonster()
+        public IActionResult GetAllMonster(int? total)
         {
             try
             {
-                return StatusCode((int)HttpStatusCode.OK, MonsterManager.GetAllMonster());
+                return StatusCode((int)HttpStatusCode.OK, MonsterManager.GetAllMonster(total));
             }
             catch (Exception ex)
             {

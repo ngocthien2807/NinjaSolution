@@ -13,6 +13,7 @@ namespace DataAccess
         IConfiguration Configuration { get; set; }
         public LienminhnhangiaContext()
         {
+
         }
 
         public LienminhnhangiaContext(DbContextOptions<LienminhnhangiaContext> options, IConfiguration configuration)

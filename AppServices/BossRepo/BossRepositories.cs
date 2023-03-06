@@ -60,13 +60,16 @@ namespace AppServices.BossRepo
             }
         }
 
-        public List<Boss> GetAllBoss()
+        public List<Boss> GetAllBoss(int? total)
         {
-            var list = new List<Boss>();
+           
             try
             {
-                list = context.Bosses.Where(boss => boss.Delete == false).ToList();
-                return list;
+                if(total != null) 
+                    return context.Bosses.Where(boss => boss.Delete == false).Take((int)total).ToList();
+
+                return context.Bosses.Where(boss => boss.Delete == false).ToList();
+                
             }
             catch (Exception ex)
             {

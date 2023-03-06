@@ -6398,8 +6398,6 @@ i.ic {
 	font-family: 'ThemeIcons';
 	src:url('http://www.inkjets.com/skin/frontend/inkjets/default/fonts/themeicons/ThemeIcons.eot?387osh');
 	src:url('http://www.inkjets.com/skin/frontend/inkjets/default/fonts/themeicons/ThemeIcons.eot?#iefix387osh') format('embedded-opentype'),
-		url('http://www.inkjets.com/skin/frontend/inkjets/default/fonts/themeicons/ThemeIcons.woff?387osh') format('woff'),
-		url('http://www.inkjets.com/skin/frontend/inkjets/default/fonts/themeicons/ThemeIcons.ttf?387osh') format('truetype'),
 		url('http://www.inkjets.com/skin/frontend/inkjets/default/fonts/themeicons/ThemeIcons.svg?387osh#ThemeIcons') format('svg');
 	font-weight: normal;
 	font-style: normal;

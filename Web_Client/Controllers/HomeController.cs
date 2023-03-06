@@ -31,6 +31,7 @@ namespace Web_Client.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
 

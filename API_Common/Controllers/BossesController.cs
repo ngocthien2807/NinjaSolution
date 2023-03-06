@@ -17,11 +17,11 @@ namespace API_Common.Controllers
         } 
 
         [HttpGet]
-        public IActionResult GetAllBoss()
+        public IActionResult GetAllBoss(int? total)
         {
             try
             {
-                return StatusCode((int)HttpStatusCode.OK, BossManager.GetAllBoss());
+                return StatusCode((int)HttpStatusCode.OK, BossManager.GetAllBoss(total));
             }
             catch (Exception ex)
             {
