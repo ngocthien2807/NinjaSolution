@@ -25,6 +25,7 @@
         public static string Register = $"{ApiUrl.BaseUrlCommon}/{ApiController.Account}/Register";
         
         public static string Profile = $"{ApiUrl.BaseUrlPlayer}/{ApiController.Account}/Profile";
+        public static string UpdateProfile = $"{ApiUrl.BaseUrlPlayer}/{ApiController.Account}/UpdateProfile";
 
 
         public static string getAllAbility = $"{ApiUrl.BaseUrlCommon}/{ApiController.Ability}/GetAllAbility";

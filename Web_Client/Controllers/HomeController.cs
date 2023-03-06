@@ -128,7 +128,32 @@ namespace Web_Client.Controllers
             return View(profile);
         }
 
-       
+        public async Task<IActionResult> UpdateProfile(UpdateProfile updateProfile)
+        {
+            string access = Request.Cookies["access"];
+            string refresh = Request.Cookies["refresh"];
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", access);
+            client.DefaultRequestHeaders.Add("refresh", refresh);
+
+            HttpResponseMessage response = await client.PutAsJsonAsync(Route.UpdateProfile, updateProfile);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return View();
+            }
+
+            new resetCookie().reset(_httpContextAccessor, response);
+
+            return RedirectToAction(nameof(Profile));
+        }
+
+        public IActionResult ChangePass()
+        {
+
+            return View();
+        }
+
 
         public IActionResult Logout()
         {

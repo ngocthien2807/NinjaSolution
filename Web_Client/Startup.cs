@@ -25,6 +25,10 @@ namespace Web_Client
         {
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
+
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromDays(1);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,12 +45,14 @@ namespace Web_Client
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthorization();
 
+            app.UseSession();
 
 
             app.UseEndpoints(endpoints =>
