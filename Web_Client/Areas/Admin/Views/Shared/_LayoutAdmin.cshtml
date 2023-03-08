@@ -38,7 +38,11 @@
                 <nav role="navigation" class="nav-global">
                     <div class="nav-global__body">
                         <ul class="nav-global__list">
-                           
+                            
+                             <li class="nav-global__item" style="height: 57px;">
+                                <a asp-controller="Item" asp-action="Index"
+                                   class="nav-global__item--game"><span></span></a>
+                            </li>
                             <li class="nav-global__item" style="height: 57px;">
                                 <a asp-area="Admin" asp-controller="CharacterAdmin" asp-action="Index"
                                    class="nav-global__item--anime"><span>Nhân vật</span></a>
@@ -62,6 +66,10 @@
                             <li class="nav-global__item" style="height: 57px;">
                                 <a asp-controller="Item" asp-action="Index"
                                    class="nav-global__item--game"><span>Vật phẩm</span></a>
+                            </li>                
+                            <li class="nav-global__item" style="height: 57px;">
+                                <a asp-controller="Item" asp-action="Index"
+                                   class="nav-global__item--game"><span></span></a>
                             </li>
 
                             <li class="nav-global__item" style="height: 57px;">
@@ -72,7 +80,7 @@
                                              src="@Avatar" alt="">
                                     </div>
                                 </div>
-                                <div class="info-charac">
+                                <div style="margin-top: 68px; z-index: 1;" class="info-charac">
                                     <div class="info-charac_items">
                                         <a asp-area="" asp-controller="Home" asp-action="Profile">
                                             <i class="fa-sharp fa-solid fa-user-tie"></i>

@@ -15,8 +15,11 @@
             }
 
         .input-lable {
-            width: 120px;
+            width: 178px;
             height: 40px;
+        }
+        .product-img{
+            margin-top: 50px;
         }
 
             .input-lable label {
@@ -33,6 +36,12 @@
         .input-input input {
             border: 0px;
             font-size: 1rem;
+        }
+
+        #text {
+            overflow:auto;
+            width:300px;
+            height:100px;
         }
     </style>
 }
@@ -51,9 +60,12 @@
 
                         </div>
                         <div class="product-info">
-                            <div class="product-text">
+                        <div style="margin-top: -30px;" class="product-text">
                                 <h1>@Html.DisplayFor(model => model.Name)</h1>
-                                <h2>@Html.DisplayFor(model => model.Description)</h2>
+
+                            <div id="text">
+                                <h2 style="style=" font-size: 11px; color: #565555;">@Html.DisplayFor(model => model.Description)</h2>
+                                </div>
 
                                 <div class="input-text">
                                     <div class="input-lable">
@@ -66,7 +78,7 @@
 
                                 <div class="input-text">
                                     <div class="input-lable">
-                                        <label for="">Tốc độ di chuyển: </label>
+                                        <label for="">Tốc độ : </label>
                                     </div>
 
                                     <div class="input-input">
@@ -76,7 +88,7 @@
 
                                 <div class="input-text">
                                     <div class="input-lable">
-                                        <label for="">Phần thưởng: </label>
+                                        <label for="">Phần thưởng </label>
                                     </div>
                                 </div>
 
@@ -92,7 +104,7 @@
 
                                 <div class="input-text">
                                     <div class="input-lable">
-                                        <label for="">Kinh nghiệm : </label>
+                                        <label for="">Kinh nghiệm :</label>
                                     </div>
                                     <div class="input-input">
                                         
@@ -103,7 +115,7 @@
 
                                 <div class="input-text">
                                     <div class="input-lable">
-                                        <label for=""> Điểm sát thương :</label>
+                                        <label for="">Sát thương :</label>
                                     </div>
 
                                     <div class="input-input">

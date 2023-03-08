@@ -66,6 +66,7 @@ img {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    margin-bottom
 }ol, ul {
     padding: 0;
     margin: 0;
@@ -101,7 +102,7 @@ img {
     transition: .3s;
 }
 .nav-global__item--anime {
-    color: #03a9f4;
+    color: #00d2ff;
 }
 .nav-global__item > a span {
     position: relative;

@@ -160,6 +160,7 @@ namespace Web_Client.Controllers
         {
             Response.Cookies.Delete("access");
             Response.Cookies.Delete("refresh");
+            HttpContext.Session.Clear();
 
             return RedirectToAction(nameof(Index));
         }
