@@ -1,9 +1,18 @@
-﻿@model DTOs.CharacterDTOs.ViewCharacterInfo
+﻿@model  DTOs.CharacterDTOs.ViewCharacterInfo
 
 @{
-    <link rel="stylesheet" href="~/assets/css/info-character.css">
+    <link rel="stylesheet" href="~/assets/css/infor-character.css">
+}
+<style>
+body{
+        background-color: #314378;
 }
 
+a{
+    color:#03a9f4;
+}
+
+</style>
 <div class="container">
     <div class="grid">
         <div class="grid__row">
@@ -11,66 +20,56 @@
                 <div style="    width: 150%;margin-left: -170px;"
                      class="pokemon-list__load-more__button size-14">
                     <span style="font-size: 26px;">
-                        Thông tin
-                        nhân vật
+                        Thông tin  nhân vật
                     </span>
                 </div>
 
                 <div class="content">
                     <div class="grid12-4 box" style=" text-align:center;height: 420px;">
                         <div class="info-avata">
-                            <img src="./assets/img/naruto.jfif" alt="">
+                            <img src="@Model.LinkImage" alt="">
                         </div>
-                        <div style="    width: 170px;
-                            margin-top: 1px;
-                            margin-left: 24px;" class="title">
-                            <img src="./assets/img/logo_web.png" alt="">
+                        <div style="    width: 170px; margin-top: 1px; margin-left: 24px;" class="title">
+                            <img src="~/assets/img/logo_web.png" alt="">
                         </div>
+                     
                     </div>
 
                     <div class="grid12-4 box" style=" text-align:center; color: #152da8; height: 420px;">
                         <img class="avarta-info"
-                             src="https://tse2.mm.bing.net/th?id=OIP.YRWxSR-98gcNp0gIu96JyAHaHa&pid=Api&P=0"
+                             src="@Model.LinkImage"
                              alt="HP"><br><br>
                         <div class="info">
                             <div class="info-item">
                                 <span>Tên</span>
                             </div>
                             <div class="info-item-body">
-                                <span>: Sonruto</span>
+                                <span> @Model.Name</span>
                             </div>
                         </div>
                         <div class="info">
                             <div class="info-item">
-                                <span>Chiều cao</span>
+                                <span>Máu</span>
                             </div>
                             <div class="info-item-body">
-                                <span>: 1m6</span>
+                                <span> @Model.Health</span>
                             </div>
                         </div>
                         <div class="info">
                             <div class="info-item">
-                                <span>Cân nặng</span>
+                                <span>Năng lượng</span>
                             </div>
                             <div class="info-item-body">
-                                <span>: 60kg</span>
+                                <span> @Model.Chakra</span>
                             </div>
                         </div>
                         <div style="height: 140px;" class="avarta-infos">
                             <div class="info">
                                 <div class="info-item">
-                                    <span>máu</span>
+                                    <span>Sát thương</span>
                                 </div>
                                 <div class="info-item-body">
-                                    <span>: 1000</span>
-                                </div>
-                            </div>
-                            <div class="info">
-                                <div class="info-item">
-                                    <span>chakra</span>
-                                </div>
-                                <div class="info-item-body">
-                                    <span>: 500</span>
+                                    <span> @Model.Damage</span>
                                 </div>
                             </div>
                             <div class="info">
@@ -78,9 +77,10 @@
                                     <span>Tốc độ</span>
                                 </div>
                                 <div class="info-item-body">
-                                    <span>: 100</span>
+                                    <span> @Model.Speed</span>
                                 </div>
                             </div>
+
                         </div>
 
                     </div>
@@ -88,50 +88,22 @@
                         <img class="avarta-info"
                              src="https://tse2.mm.bing.net/th?id=OIP.l4dpnCXYV6q1GVChVTltnQHaHa&pid=Api&P=0"
                              alt="HP"><br><br>
-                        <div class="skill">
-                            <div class="skill-item">
-                                <div class="skill-text">
-                                    <span>Nội tại</span>
-                                </div>
-                                <div class="skill-img">
-                                    <img src="https://we25.vn/media/images/gio-nam-dam-len-va-toi-se-cho-ban-biet-ban-la-ai!-3.jpg"
-                                         alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="skill">
-                            <div class="skill-item">
-                                <div class="skill-text">
-                                    <span>Shuriken</span>
-                                </div>
-                                <div class="skill-img">
-                                    <img src="https://www.pngitem.com/pimgs/m/147-1471386_collection-of-free-naruto-drawing-rasenshuriken-download-naruto.png"
-                                         alt="">
+
+                        @foreach (var skill in Model.Skills)
+                        {
+                            <div class="skill">
+                                <div class="skill-item">
+                                    <div class="skill-text">
+                                        <span>@skill.Name</span>
+                                    </div>
+                                    <div class="skill-img">
+                                        <img src="@skill.LinkImage"
+                                             alt="">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="skill">
-                            <div class="skill-item">
-                                <div class="skill-text">
-                                    <span>Triệu hồi</span>
-                                </div>
-                                <div class="skill-img">
-                                    <img src="https://i.pinimg.com/736x/f1/55/61/f1556127bf70f2f3b9e30f37c03d600b.jpg"
-                                         alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="skill">
-                            <div class="skill-item">
-                                <div class="skill-text">
-                                    <span>Rasengan</span>
-                                </div>
-                                <div class="skill-img">
-                                    <img src="https://play-lh.googleusercontent.com/vuvvlVRExROLb_dABHC3R95LdTb-j19JGOJxb4x4Gj1ooTxHnH3_QAg3fsN6GrpGsKA"
-                                         alt="">
-                                </div>
-                            </div>
-                        </div>
+                        }
+
                     </div>
 
                 </div>
@@ -140,191 +112,74 @@
 
 
             <div class="pokemon-list__header">
-                <div style="width: 105%;margin-left: -14px;" class="pokemon-list__load-more__button size-14">
+                <div style="width: 120%;margin-left: -78px;" class="pokemon-list__load-more__button size-14">
                     <span style="font-size: 26px;">
-                        Thông tin
-                        kỹ năng
+                        Thông tin kỹ năng
                     </span>
                 </div>
 
                 <div class="content" style="margin-left: 36px;">
+                    @foreach (var skill in Model.Skills)
+                    {
 
-                    <div class="grid12-4 box"
-                         style=" text-align:center; color: #152da8; height: 420px;margin-bottom: 20px;">
-                        <img class="avarta-info"
-                             src="https://tse2.mm.bing.net/th?id=OIP.YRWxSR-98gcNp0gIu96JyAHaHa&pid=Api&P=0"
-                             alt="HP"><br><br>
-                        <div class="info">
-                            <div class="info-item">
-                                <span>Tên</span>
-                            </div>
-                            <div class="info-item-body">
-                                <span>: Sonruto</span>
-                            </div>
-                        </div>
-                        <div class="info">
-                            <div class="info-item">
-                                <span>Chiều cao</span>
-                            </div>
-                            <div class="info-item-body">
-                                <span>: 1m6</span>
-                            </div>
-                        </div>
-                        <div class="info">
-                            <div class="info-item">
-                                <span>Cân nặng</span>
-                            </div>
-                            <div class="info-item-body">
-                                <span>: 60kg</span>
-                            </div>
-                        </div>
-                        <div style="height: 140px;" class="avarta-infos">
+                        <div class="grid12-4 box" style=" text-align:center; color: #152da8; height: 420px;">
+                            <img class="avarta-info"
+                                 src="@skill.LinkImage"
+                                 alt="HP"><br><br>
                             <div class="info">
                                 <div class="info-item">
-                                    <span>máu</span>
+                                    <span>Tên</span>
                                 </div>
                                 <div class="info-item-body">
-                                    <span>: 1000</span>
+                                    <span> @skill.Name</span>
                                 </div>
                             </div>
                             <div class="info">
                                 <div class="info-item">
-                                    <span>chakra</span>
+                                    <span>Mô tả</span>
                                 </div>
                                 <div class="info-item-body">
-                                    <span>: 500</span>
+                                    <span> @skill.Description</span>
                                 </div>
                             </div>
                             <div class="info">
                                 <div class="info-item">
-                                    <span>Tốc độ</span>
+                                    <span>Năng lượng</span>
                                 </div>
                                 <div class="info-item-body">
-                                    <span>: 100</span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="grid12-4 box"
-                         style=" text-align:center; color: #152da8; height: 420px;margin-bottom: 20px;">
-                        <img class="avarta-info"
-                             src="https://tse2.mm.bing.net/th?id=OIP.YRWxSR-98gcNp0gIu96JyAHaHa&pid=Api&P=0"
-                             alt="HP"><br><br>
-                        <div class="info">
-                            <div class="info-item">
-                                <span>Tên</span>
-                            </div>
-                            <div class="info-item-body">
-                                <span>: Sonruto</span>
-                            </div>
-                        </div>
-                        <div class="info">
-                            <div class="info-item">
-                                <span>Chiều cao</span>
-                            </div>
-                            <div class="info-item-body">
-                                <span>: 1m6</span>
-                            </div>
-                        </div>
-                        <div class="info">
-                            <div class="info-item">
-                                <span>Cân nặng</span>
-                            </div>
-                            <div class="info-item-body">
-                                <span>: 60kg</span>
-                            </div>
-                        </div>
-                        <div style="height: 140px;" class="avarta-infos">
-                            <div class="info">
-                                <div class="info-item">
-                                    <span>máu</span>
-                                </div>
-                                <div class="info-item-body">
-                                    <span>: 1000</span>
+                                    <span> @skill.Chakra</span>
                                 </div>
                             </div>
                             <div class="info">
                                 <div class="info-item">
-                                    <span>chakra</span>
+                                    <span>Sát thương</span>
                                 </div>
                                 <div class="info-item-body">
-                                    <span>: 500</span>
+                                    <span> @skill.Damage</span>
                                 </div>
                             </div>
-                            <div class="info">
-                                <div class="info-item">
-                                    <span>Tốc độ</span>
+                            <div style="height: 140px;" class="avarta-infos">
+                                <div class="info">
+                                    <div class="info-item">
+                                        <span>Số xu</span>
+                                    </div>
+                                    <div class="info-item-body">
+                                        <span> @skill.Coin</span>
+                                    </div>
                                 </div>
-                                <div class="info-item-body">
-                                    <span>: 100</span>
+                                <div class="info">
+                                    <div class="info-item">
+                                        <span>Level mở khóa</span>
+                                    </div>
+                                    <div class="info-item-body">
+                                        <span> @skill.LevelUnlock</span>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
 
-                    </div>
-
-
-
-                    <div class="grid12-4 box"
-                         style=" text-align:center; color: #152da8; height: 420px; margin-bottom: 20px;">
-                        <img class="avarta-info"
-                             src="https://tse2.mm.bing.net/th?id=OIP.YRWxSR-98gcNp0gIu96JyAHaHa&pid=Api&P=0"
-                             alt="HP"><br><br>
-                        <div class="info">
-                            <div class="info-item">
-                                <span>Tên</span>
-                            </div>
-                            <div class="info-item-body">
-                                <span>: Sonruto</span>
-                            </div>
-                        </div>
-                        <div class="info">
-                            <div class="info-item">
-                                <span>Chiều cao</span>
-                            </div>
-                            <div class="info-item-body">
-                                <span>: 1m6</span>
-                            </div>
-                        </div>
-                        <div class="info">
-                            <div class="info-item">
-                                <span>Cân nặng</span>
-                            </div>
-                            <div class="info-item-body">
-                                <span>: 60kg</span>
-                            </div>
-                        </div>
-                        <div style="height: 140px;" class="avarta-infos">
-                            <div class="info">
-                                <div class="info-item">
-                                    <span>máu</span>
-                                </div>
-                                <div class="info-item-body">
-                                    <span>: 1000</span>
-                                </div>
-                            </div>
-                            <div class="info">
-                                <div class="info-item">
-                                    <span>chakra</span>
-                                </div>
-                                <div class="info-item-body">
-                                    <span>: 500</span>
-                                </div>
-                            </div>
-                            <div class="info">
-                                <div class="info-item">
-                                    <span>Tốc độ</span>
-                                </div>
-                                <div class="info-item-body">
-                                    <span>: 100</span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-
+                    }
 
 
                 </div>
@@ -334,6 +189,7 @@
 
 
 </div>
+
 
 @*
 <div class="container">
@@ -371,7 +227,7 @@
                                 <span>Máu</span>
                             </div>
                             <div class="info-item-body">
-                                <span>: @Model.Health</span>
+                                <span> @Model.Health</span>
                             </div>
                         </div>
                         <div class="info">
@@ -379,7 +235,7 @@
                                 <span>Năng lượng</span>
                             </div>
                             <div class="info-item-body">
-                                <span>: @Model.Chakra</span>
+                                <span> @Model.Chakra</span>
                             </div>
                         </div>
                         <div style="height: 140px;" class="avarta-infos">
@@ -388,7 +244,7 @@
                                     <span>Sát thương</span>
                                 </div>
                                 <div class="info-item-body">
-                                    <span>: @Model.Damage</span>
+                                    <span> @Model.Damage</span>
                                 </div>
                             </div>
                             <div class="info">
@@ -396,7 +252,7 @@
                                     <span>Tốc độ di chuyển</span>
                                 </div>
                                 <div class="info-item-body">
-                                    <span>: @Model.Speed</span>
+                                    <span> @Model.Speed</span>
                                 </div>
                             </div>
                             <div class="info">
@@ -404,7 +260,7 @@
                                     <span>Tốc độ</span>
                                 </div>
                                 <div class="info-item-body">
-                                    <span>: 100</span>
+                                    <span> 100</span>
                                 </div>
                             </div>
                         </div>
@@ -451,7 +307,7 @@
                                     <span>Tên</span>
                                 </div>
                                 <div class="info-item-body">
-                                    <span>: @skill.Name</span>
+                                    <span> @skill.Name</span>
                                 </div>
                             </div>
                             <div class="info">
@@ -459,7 +315,7 @@
                                     <span>Mô tả</span>
                                 </div>
                                 <div class="info-item-body">
-                                    <span>: @skill.Description</span>
+                                    <span> @skill.Description</span>
                                 </div>
                             </div>
                             <div class="info">
@@ -467,7 +323,7 @@
                                     <span>Năng lượng</span>
                                 </div>
                                 <div class="info-item-body">
-                                    <span>: @skill.Chakra</span>
+                                    <span> @skill.Chakra</span>
                                 </div>
                             </div>
                             <div class="info">
@@ -475,7 +331,7 @@
                                     <span>Sát thương</span>
                                 </div>
                                 <div class="info-item-body">
-                                    <span>: @skill.Damage</span>
+                                    <span> @skill.Damage</span>
                                 </div>
                             </div>
                             <div style="height: 140px;" class="avarta-infos">
@@ -484,7 +340,7 @@
                                         <span>Số xu</span>
                                     </div>
                                     <div class="info-item-body">
-                                        <span>: @skill.Coin</span>
+                                        <span> @skill.Coin</span>
                                     </div>
                                 </div>
                                 <div class="info">
@@ -492,7 +348,7 @@
                                         <span>Level mở khóa</span>
                                     </div>
                                     <div class="info-item-body">
-                                        <span>: @skill.LevelUnlock</span>
+                                        <span> @skill.LevelUnlock</span>
                                     </div>
                                 </div>
                             </div>                  

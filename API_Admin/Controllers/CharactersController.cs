@@ -4,6 +4,7 @@ using System;
 using AppServices.CharacterRepo;
 using Microsoft.AspNetCore.Authorization;
 using DataAccess.Models;
+using DTOs.CharacterDTOs;
 
 namespace API_Common.Controllers
 {
@@ -18,6 +19,19 @@ namespace API_Common.Controllers
         public CharactersController(CharacterRepositories characterManager)
         {
             CharacterManager = characterManager;
+        }
+
+        [HttpGet]
+        public IActionResult GetAllCharacter()
+        {
+            try
+            {
+                return StatusCode((int)HttpStatusCode.OK, CharacterManager.GetAllCharacter<ViewCharacterInfo>(null, true));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.NotFound, ex.Message);
+            }
         }
 
         [HttpPost]

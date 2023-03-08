@@ -1,6 +1,10 @@
-﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+﻿@using Microsoft.AspNetCore.Http;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 
-
+@{
+    HttpContext httpContext = HttpContextAccessor.HttpContext;
+    string Avatar = httpContext.Session.GetString("Avatar");
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,8 +18,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
     <link rel="stylesheet" href="~/assets/font/fontawesome-free-6.2.0/css/all.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
 <body>
     <header role="banner" class="global-header">
         <div class="grid">
@@ -74,11 +80,7 @@
                             </div>
 
                             @{
-
-                                var Avatar = HttpContextAccessor.HttpContext.Request.Cookies["Avatar"];
-                                var Name = HttpContextAccessor.HttpContext.Request.Cookies["Name"];
-
-                                if (Avatar == null || Name == null)
+                                if (Avatar == null )
                                 {
                                     <li class="nav-global__item" style="height: 57px;">
                                         <div class="search_button">

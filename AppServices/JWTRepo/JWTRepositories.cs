@@ -29,8 +29,8 @@ namespace AppServices.JWTRepo
             {
                 Access_Token = accessToken,
                 Refresh_Token = refreshToken,
-                Name = data.Name,
                 Avatar = data.Avatar,
+                Role = data.Role
             };
         }
 

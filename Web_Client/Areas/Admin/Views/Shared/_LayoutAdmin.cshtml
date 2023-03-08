@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    var Avatar = HttpContextAccessor.HttpContext.Request.Cookies["Avatar"];
+    var Name = HttpContextAccessor.HttpContext.Request.Cookies["Name"];
+}
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -8,8 +15,12 @@
     <link rel="stylesheet" href="~/assets/css/header.css">
     <link rel="stylesheet" href="~/assets/css/body.css">
     <link rel="stylesheet" href="~/assets/css/footer.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <link rel="stylesheet" href="~/assets/font/fontawesome-free-6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/assets/font/fontawesome-free-6.2.0/css/all.min.css" crossorigin="anonymous">
+    <link href="~/admin/css/style.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="~/admin/js/common.min.js"></script>
+    <script src="~/admin/js/custom.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 
 <body>
@@ -18,7 +29,7 @@
             <div class="global-header__body">
                 <div class="global-header__title">
                     <h1 class="global-header__site-name">
-                        <a asp-controller="Home" asp-action="Index" >
+                        <a asp-controller="Home" asp-action="Index">
                             <img src="~/assets/img/logo_web.png"
                                  alt="Hoc vien ninja" width="130">
                         </a>
@@ -27,13 +38,9 @@
                 <nav role="navigation" class="nav-global">
                     <div class="nav-global__body">
                         <ul class="nav-global__list">
+                           
                             <li class="nav-global__item" style="height: 57px;">
-                                <a asp-controller="Home"  asp-action="HowToPlay"
-                                   class="nav-global__item--goods"><span>Giới thiệu</span></a>
-                            </li>
-
-                            <li class="nav-global__item" style="height: 57px;">
-                                <a asp-controller="Character" asp-action="Index"
+                                <a asp-area="Admin" asp-controller="CharacterAdmin" asp-action="Index"
                                    class="nav-global__item--anime"><span>Nhân vật</span></a>
                             </li>
 
@@ -46,7 +53,7 @@
                                 <a asp-controller="Boss" asp-action="Index"
                                    class="nav-global__item--event"><span>Boss</span></a>
                             </li>
-                          
+
                             <li class="nav-global__item" style="height: 57px;">
                                 <a asp-controller="Ability" asp-action="Index"
                                    class="nav-global__item--game"><span>Nội tại</span></a>
@@ -57,53 +64,35 @@
                                    class="nav-global__item--game"><span>Vật phẩm</span></a>
                             </li>
 
-                            <form action="/tim-kiem" onsubmit="return suggestSearch(event);" class="header__search">
-                                <input id="skw" type="text" class="input-search" onkeyup="suggestSearch(event);"
-                                       placeholder="Bạn tìm gì..." name="key" autocomplete="off" maxlength="100">
+                            <li class="nav-global__item" style="height: 57px;">
 
-                            </form>
-
-                            <div class="search_button">
-                                <button type="submit">
-                                    <i style="font-size: 24px;" class="fa-solid fa-magnifying-glass"></i>
-                                </button>
-                            </div>
-                            
-                            @*<li class="nav-global__item" style="height: 57px;">
-                               
                                 <div style="margin-left: 20px;" class="avatar-img">
                                     <div style="width: 50px; height: 50px;border: 1px solid #ccc2c2;border-radius: 50%;" class="avatar-img-items">
-                                        <img style="width: 100%;border-radius: 50%;" src="https://4.bp.blogspot.com/-FP8viazhs9E/WV7kFq5VzzI/AAAAAAAASJ8/lTGjb3yLTD0VG02WhpU4y7MDVZPVxiXNgCLcBGAs/s1600/hinh-anh-naruto-chibi-de-thuong-anh-avatar-naruto-dep%2B%252811%2529.jpg" alt="">
+                                        <img style="width: 100%;border-radius: 50%;"
+                                             src="@Avatar" alt="">
                                     </div>
                                 </div>
                                 <div class="info-charac">
                                     <div class="info-charac_items">
-                                        <a href="/admin.html">
+                                        <a asp-area="" asp-controller="Home" asp-action="Profile">
                                             <i class="fa-sharp fa-solid fa-user-tie"></i>
-                                            <span>infomation</span>
+                                            <span>Xem thông tin</span>
                                         </a>
                                     </div>
-                                    <div style="position:relative;" class="info-charac_items">
-                                        <a href="">
-                                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                            <span style="margin-top: -4px;">logout</span>
+                                    <div class="info-charac_items">
+                                        <a asp-area="" asp-controller="Home" asp-action="ChangePass">
+                                            <i class="fa-sharp fa-solid fa-user-tie"></i>
+                                            <span>Đổi mật khẩu</span>
                                         </a>
                                     </div>
 
-                                </div>
-                            </li>
-*@
-                            <li class="nav-global__item" style="height: 57px;">
-                                <div class="search_button">
-                                    @using (Html.BeginForm("Login", "Home", FormMethod.Get))
-                                    {
-                                        <button type="submit" class="sum">
-                                            <span style=" font-size: 17px;line-height: 35px;">
-                                                Login<br class="hidden-xs">
-                                            </span>
-                                        </button>
-                                    }
-                                    
+                                    <div style="position:relative;" class="info-charac_items">
+                                        <a asp-area="" asp-controller="Home" asp-action="Logout">
+                                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                            <span style="margin-top: -4px;">Đăng xuất</span>
+                                        </a>
+                                    </div>
+
                                 </div>
                             </li>
                         </ul>
@@ -125,7 +114,7 @@
             <!---->
             <div class="bottom" data-v-514bccfc="">
                 <div class="logos" data-v-514bccfc="">
-                    <img src="./assets/img/logo_web.png" alt="">
+                    <img src="~/assets/img/logo_web.png" alt="">
                 </div>
                 <div class="cnt" data-v-514bccfc="">
                     <div class="copyrights" data-v-514bccfc="">
@@ -144,14 +133,17 @@
                                class="link" data-v-514bccfc="">
                                 <i style="padding-right: 8px;" class="fa-brands fa-facebook"></i>
                                 <div class="link-txt" data-v-514bccfc="">Facebook</div>
-                            </a><a href="javascript:void(0)" target="_blank" rel="noreferrer noopener" class="link"
-                                   data-v-514bccfc="">
+                            </a>
+                            <a href="javascript:void(0)" target="_blank" rel="noreferrer noopener" class="link"
+                               data-v-514bccfc="">
                                 <i style="padding-right: 8px;" class="fa-brands fa-youtube"></i>
                                 <div class="link-txt" data-v-514bccfc="">Youtube</div>
-                            </a><a href="javascript:void(0)" target="_blank" rel="noreferrer noopener" class="link"
-                                   data-v-514bccfc="">
+                            </a>
+                            <a href="javascript:void(0)" target="_blank" rel="noreferrer noopener" class="link"
+                               data-v-514bccfc="">
                                 <i style="padding-right: 8px;" class="fa-solid fa-envelope"></i>
                                 <div class="link-txt" data-v-514bccfc="">Gmail</div>
+                            </a>
                         </div>
                     </div>
                     <div class="vn-playForFree" data-v-514bccfc="">

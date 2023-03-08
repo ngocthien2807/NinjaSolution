@@ -72,8 +72,10 @@ namespace Web_Client.Controllers
 
             Response.Cookies.Append("access", tokens.Access_Token, CookieOptions);
             Response.Cookies.Append("refresh", tokens.Refresh_Token, CookieOptions);
-            Response.Cookies.Append("Avatar", tokens.Avatar, CookieOptions);
-            Response.Cookies.Append("Name", tokens.Name, CookieOptions);
+
+            HttpContext.Session.SetString("Avatar", tokens.Avatar);
+
+            if (tokens.Role == Role.Admin) return RedirectToAction("Index", "HomeAdmin", new { area = "Admin" });
 
             return RedirectToAction(nameof(Index));
         }
@@ -122,8 +124,6 @@ namespace Web_Client.Controllers
             };
             var profile = JsonSerializer.Deserialize<AccountProfile>(strData, options);
 
-            //var headerValue = response.Headers.GetValues("Authorization").FirstOrDefault();
-
             new resetCookie().reset(_httpContextAccessor, response);
 
             return View(profile);
@@ -160,9 +160,6 @@ namespace Web_Client.Controllers
         {
             Response.Cookies.Delete("access");
             Response.Cookies.Delete("refresh");
-            Response.Cookies.Delete("Avatar");
-            Response.Cookies.Delete("Name");
-
 
             return RedirectToAction(nameof(Index));
         }

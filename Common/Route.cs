@@ -21,13 +21,10 @@
 
     public static class Route
     {
+        #region Common
         public static string Login = $"{ApiUrl.BaseUrlCommon}/{ApiController.Account}/Login";
         public static string Register = $"{ApiUrl.BaseUrlCommon}/{ApiController.Account}/Register";
         
-        public static string Profile = $"{ApiUrl.BaseUrlPlayer}/{ApiController.Account}/Profile";
-        public static string UpdateProfile = $"{ApiUrl.BaseUrlPlayer}/{ApiController.Account}/UpdateProfile";
-
-
         public static string getAllAbility = $"{ApiUrl.BaseUrlCommon}/{ApiController.Ability}/GetAllAbility";
         public static string getByIDAbility = $"{ApiUrl.BaseUrlCommon}/{ApiController.Ability}/GetAbilitybyID/" + "{0}";
 
@@ -42,6 +39,18 @@
 
         public static string getAllMonster = $"{ApiUrl.BaseUrlCommon}/{ApiController.Monster}/GetAllMonster";
         public static string getByIDMonster = $"{ApiUrl.BaseUrlCommon}/{ApiController.Monster}/GetMonsterbyID/" + "{0}";
-        
+        #endregion
+
+
+        #region Player
+        public static string Profile = $"{ApiUrl.BaseUrlPlayer}/{ApiController.Account}/Profile";
+        public static string UpdateProfile = $"{ApiUrl.BaseUrlPlayer}/{ApiController.Account}/UpdateProfile";
+        #endregion
+
+
+        #region Admin
+        public static string getAllCharacterAdmin = $"{ApiUrl.BaseUrlAdmin}/{ApiController.Character}/GetAllCharacter";
+
+        #endregion
     }
 }

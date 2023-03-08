@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using System.Net;
 using System;
 using AppServices.CharacterRepo;
+using DTOs.CharacterDTOs;
 
 namespace API_Common.Controllers
 {
@@ -22,7 +23,7 @@ namespace API_Common.Controllers
         {
             try
             {
-                return StatusCode((int)HttpStatusCode.OK, CharacterManager.GetAllCharacter(total));
+                return StatusCode((int)HttpStatusCode.OK, CharacterManager.GetAllCharacter<ViewCharacter>(total));
             }
             catch (Exception ex)
             {

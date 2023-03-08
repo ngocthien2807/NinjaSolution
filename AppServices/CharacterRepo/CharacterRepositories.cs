@@ -7,6 +7,7 @@ using System.Linq;
 using AutoMapper;
 using DTOs.CharacterDTOs;
 using AppServices.SkillRepo;
+using Newtonsoft.Json;
 
 namespace AppServices.CharacterRepo
 {
@@ -69,11 +70,18 @@ namespace AppServices.CharacterRepo
             }
         }
 
-        public List<ViewCharacter> GetAllCharacter(int? total)
+        public List<T> GetAllCharacter<T>(int? total, bool isAdmin = false)
         {
             try
             {
                 var characters = context.Characters.Where(cha => cha.Delete == false).ToList();
+
+                if (isAdmin)
+                {
+                    var viewCharacter = mapper.Map<List<Character>, List<ViewCharacterInfo>>(characters);
+                    return viewCharacter.Cast<T>().ToList();
+                }
+
                 var viewCharacters = mapper.Map<List<Character>, List<ViewCharacter>>(characters);
                
                 if (total != null)
@@ -81,7 +89,7 @@ namespace AppServices.CharacterRepo
                     viewCharacters =viewCharacters.Take((int)total).ToList(); ;
                 }
 
-                return viewCharacters;
+                return viewCharacters.Cast<T>().ToList();
             }
             catch (Exception ex)
             {
