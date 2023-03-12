@@ -50,6 +50,9 @@
 
         #region Admin
         public static string getAllCharacterAdmin = $"{ApiUrl.BaseUrlAdmin}/{ApiController.Character}/GetAllCharacter";
+        public static string addCharacter = $"{ApiUrl.BaseUrlAdmin}/{ApiController.Character}/AddCharacter";
+        public static string updateCharacter = $"{ApiUrl.BaseUrlAdmin}/{ApiController.Character}/UpdateCharacter";
+        public static string deleteCharacter = $"{ApiUrl.BaseUrlAdmin}/{ApiController.Character}/DeleteCharacter";
 
         #endregion
     }

@@ -35,6 +35,18 @@ namespace AppServices.CharacterRepo
             }
             catch (Exception ex)
             {
+                if(context.Characters.SingleOrDefault(cha => cha.CharacterId.Equals(character.CharacterId)) != null)
+                {
+                    throw new Exception($"ID nhân vật {character.CharacterId} đã tồn tại");
+                }
+
+                foreach (var skill in character.Skills)
+                {
+                    if (context.Skills.SingleOrDefault(s => s.SkillId.Equals(skill.SkillId)) != null)
+                    {
+                        throw new Exception($"ID kỹ năng {skill.SkillId} đã tồn tại");
+                    }
+                }
                 throw new Exception(ex.Message);
             }
         }
