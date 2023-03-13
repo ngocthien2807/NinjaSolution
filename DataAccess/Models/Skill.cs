@@ -16,7 +16,6 @@ namespace DataAccess.Models
         public string CharacterId { get; set; }
         public string Name { get; set; }
         public int Chakra { get; set; }
-        public float Cooldown { get; set; }
         public int Damage { get; set; }
         public int Coin { get; set; }
         public int LevelUnlock { get; set; }

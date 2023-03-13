@@ -56,6 +56,10 @@ namespace AppServices.CharacterRepo
             try
             {
                 context.Entry<Character>(updateCharacter).State = EntityState.Modified;
+                foreach(var skill in updateCharacter.Skills)
+                {
+                    context.Entry<Skill>(skill).State = EntityState.Modified;
+                }
 
                 context.SaveChanges();
                 return true;
@@ -90,7 +94,7 @@ namespace AppServices.CharacterRepo
 
                 if (isAdmin)
                 {
-                    var viewCharacter = mapper.Map<List<Character>, List<ViewCharacterInfo>>(characters);
+                    var viewCharacter = mapper.Map<List<Character>, List<ViewCharacterAdmin>>(characters);
                     return viewCharacter.Cast<T>().ToList();
                 }
 

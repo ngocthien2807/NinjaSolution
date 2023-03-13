@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Http;
 @using Obj_Common;
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
-@model IEnumerable<DTOs.CharacterDTOs.ViewCharacterInfo>
+@model IEnumerable<DTOs.CharacterDTOs.ViewCharacterAdmin>
 @{
     HttpContext httpContext = HttpContextAccessor.HttpContext;
     string access = httpContext.Request.Cookies["access"];
@@ -82,8 +82,11 @@
                                         <td> ${v.damage}  </td>
                                         <td> ${v.speed}   </td>
                                         <td>
+                                            <a href="/Admin/CharacterAdmin/Detail/${v.characterId}">
+                                                    <img src="/admin/img/info.png" />
+                                            </a>
                                             <a href="/Admin/CharacterAdmin/Update/${v.characterId}">
-                                                    <img src="/admin/img/edit.png" />
+                                                <img src="/admin/img/edit.png" />
                                             </a>
                                             <img class="delete" characterId="${v.characterId}" src="/admin/img/delete.png" />
                                         </td>

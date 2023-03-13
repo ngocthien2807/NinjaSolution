@@ -38,7 +38,7 @@ namespace API_Common.Controllers
             {
                 var character = CharacterManager.GetCharacterbyID(characterId);
                 if (character == null)
-                    return StatusCode((int)HttpStatusCode.BadRequest, "Monster does not exists");
+                    return StatusCode((int)HttpStatusCode.BadRequest, "Character does not exists");
                 return StatusCode((int)HttpStatusCode.OK, character);
             }
             catch (Exception ex)

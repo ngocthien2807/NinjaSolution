@@ -9,6 +9,7 @@ namespace DTOs.SkillDTOs
         public int Chakra { get; set; }
         public int Damage { get; set; }
         public int Coin { get; set; }
+        public int UpdateCoin { get; set; }
         public int LevelUnlock { get; set; }
         public string Description { get; set; }
         public string LinkImage { get; set; }

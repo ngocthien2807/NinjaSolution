@@ -43,7 +43,7 @@ namespace Web_Client.Areas.Admin.Controllers
             {
                 PropertyNameCaseInsensitive = true,
             };
-            List<ViewCharacterInfo> characters = JsonSerializer.Deserialize<List<ViewCharacterInfo>>(strData, options);
+            List<ViewCharacterAdmin> characters = JsonSerializer.Deserialize<List<ViewCharacterAdmin>>(strData, options);
             
             return View(characters);
         }
@@ -105,24 +105,37 @@ namespace Web_Client.Areas.Admin.Controllers
 
 
      
-        public IActionResult Update(string id)
+        public async Task<ViewCharacterInfo> GetByID(string id)
         {
-            //string access = Request.Cookies["access"];
-            //string refresh = Request.Cookies["refresh"];
+            string access = Request.Cookies["access"];
+            string refresh = Request.Cookies["refresh"];
 
-            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", access);
-            //client.DefaultRequestHeaders.Add("refresh", refresh);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", access);
+            client.DefaultRequestHeaders.Add("refresh", refresh);
 
 
-            //HttpResponseMessage response = await client.GetAsync(Route.getAllCharacterAdmin);
-            //string strData = await response.Content.ReadAsStringAsync();
-            //var options = new JsonSerializerOptions
-            //{
-            //    PropertyNameCaseInsensitive = true,
-            //};
-            //List<ViewCharacterInfo> characters = JsonSerializer.Deserialize<List<ViewCharacterInfo>>(strData, options);
+            HttpResponseMessage response = await client.GetAsync(String.Format(Route.getByIDCharacter, id));
+            string strData = await response.Content.ReadAsStringAsync();
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
+            ViewCharacterInfo characters = JsonSerializer.Deserialize<ViewCharacterInfo>(strData, options);
 
-            return View();
+            return characters;
         }
+
+        public async Task<IActionResult> Detail(string id)
+        {
+            var character = await GetByID(id);
+            return View(character);
+        }
+
+        public async Task<IActionResult> Update(string id)
+        {
+            var character = await GetByID(id);
+            return View(character);
+        }
+
     }
 }
