@@ -2,6 +2,7 @@
 using DataAccess;
 using DataAccess.Models;
 using DTOs.AccountDTOs;
+using DTOs.CharacterDTOs;
 using Obj_Common;
 using System;
 using System.Collections.Generic;
@@ -20,16 +21,19 @@ namespace AppServices.AccountRepo
             this.mapper = mapper;
         }
 
-        public List<Account> GetAllAccount()
+        public List<ViewAccountAdmin> GetAllAccount()
         {
             try
             {
-                return context.Accounts.Where(account => account.Role != Role.Admin && account.Delete == false).ToList();
+                var accounts = context.Accounts.Where(account => account.Role != Role.Admin && account.Delete == false).ToList();
+
+                var accountAdmins = mapper.Map<List<Account>, List<ViewAccountAdmin>>(accounts);
+
+                return accountAdmins;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-
             }
         }
 
@@ -60,11 +64,18 @@ namespace AppServices.AccountRepo
            
         }
 
-        public AccountProfile Profile(int accountId)
+        public object Profile(int accountId, bool isAdmin = false)
         {
             try
             {
                 var account = context.Accounts.SingleOrDefault(acc => acc.AccountId == accountId && acc.Delete == false);
+
+                if (isAdmin)
+                {
+                    var viewAccountInfo = mapper.Map<Account, ViewAccountInfo>(account);
+                    return viewAccountInfo;
+                }
+
                 var profile = mapper.Map<Account, AccountProfile>(account);
 
                 return profile;
@@ -79,14 +90,15 @@ namespace AppServices.AccountRepo
         { 
             try
             {
-                var account = context.Accounts.SingleOrDefault(acc => acc.Username == newAccount.Username);
-
-                if (account != null) return false;
+                if (context.Accounts.SingleOrDefault(acc => acc.Username.Equals(newAccount.Username)) != null)
+                {
+                    throw new Exception($"Tên đăng nhập {newAccount.Username} đã tồn tại");
+                }
 
                 newAccount.Password = Common.Hash(newAccount.Password);
                 context.Accounts.Add(newAccount);
-
-                return context.SaveChanges() == 1;
+                context.SaveChanges();
+                return  true;
             }
             catch (Exception ex)
             {

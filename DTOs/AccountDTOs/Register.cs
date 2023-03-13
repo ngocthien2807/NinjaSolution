@@ -13,7 +13,7 @@ namespace DTOs.AccountDTOs
         [Compare(nameof(Password))] 
         public string ConfirmPassword { get; set; }
 
-        public Role Role { get; set; }
-        public string Avatar { get; set; }
+        public Role Role { get; set; } = Role.Player;
+        public string Avatar { get; set; } = "/img/user.png";
     }
 }

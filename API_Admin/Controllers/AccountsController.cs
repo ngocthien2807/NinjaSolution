@@ -6,6 +6,7 @@ using AppServices.AccountRepo;
 using DTOs.AccountDTOs;
 using DataAccess.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Linq;
 
 namespace API_Admin.Controllers
 {
@@ -80,6 +81,24 @@ namespace API_Admin.Controllers
             try
             {
                 return StatusCode((int)HttpStatusCode.OK, AccountManager.GetAllAccount());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.NotFound, ex.Message);
+            }
+        }
+
+        [HttpGet("{accountId}")]
+        public IActionResult GetbyID(int accountId)
+        {
+            try
+            {
+                var account = AccountManager.Profile(accountId, true);
+
+                if (account == null)
+                    return StatusCode((int)HttpStatusCode.BadRequest, "Account does not exists.");
+
+                return StatusCode((int)HttpStatusCode.OK, account);
             }
             catch (Exception ex)
             {

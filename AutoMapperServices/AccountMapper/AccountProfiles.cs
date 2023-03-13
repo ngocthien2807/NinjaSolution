@@ -18,6 +18,10 @@ namespace AutoMapperServices.AccountMapper
             CreateMap<Account, AccountProfile>();
 
             CreateMap<Account, Payload>();
+
+            CreateMap<Account, ViewAccountAdmin>();
+
+            CreateMap<Account, ViewAccountInfo>();
         }
     }
 }
