@@ -26,7 +26,7 @@ namespace API_Common.Controllers
         {
             try
             {
-                return StatusCode((int)HttpStatusCode.OK, CharacterManager.GetAllCharacter<ViewCharacterInfo>(null, true));
+                return StatusCode((int)HttpStatusCode.OK, CharacterManager.GetAllCharacter<ViewCharacterAdmin>(null, true));
             }
             catch (Exception ex)
             {

@@ -19,6 +19,8 @@ namespace AutoMapperServices.CharacterMapper
 
             CreateMap<Character, ViewCharacterInfo>();
 
+            CreateMap<Character, ViewCharacterAdmin>();
+
             CreateMap<AccountCharacter, ViewCharacterAccountInfo>()
                 .ForMember(viewCharacterAccount => viewCharacterAccount.Chakra,
                                     opt => opt.MapFrom(src => src.ChakraBonus + src.Character.Chakra))
