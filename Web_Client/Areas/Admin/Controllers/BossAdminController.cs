@@ -1,4 +1,4 @@
-﻿using DTOs.AccountDTOs;
+﻿using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
@@ -7,16 +7,14 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System;
 using Obj_Common;
-using DataAccess.Models;
 
 namespace Web_Client.Areas.Admin.Controllers
 {
-    public class MonsterAdminController : Controller
+    public class BossAdminController : Controller
     {
         private readonly HttpClient client = null;
 
-
-        public MonsterAdminController()
+        public BossAdminController()
         {
             client = new HttpClient();
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
@@ -32,15 +30,15 @@ namespace Web_Client.Areas.Admin.Controllers
             client.DefaultRequestHeaders.Add("refresh", refresh);
 
 
-            HttpResponseMessage response = await client.GetAsync(Route.getAllMonsterAdmin);
+            HttpResponseMessage response = await client.GetAsync(Route.getAllBossAdmin);
             string strData = await response.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true,
             };
-            List<Monster> monsterAdmins = JsonSerializer.Deserialize<List<Monster>>(strData, options);
+            List<Boss> bosses = JsonSerializer.Deserialize<List<Boss>>(strData, options);
 
-            return View(monsterAdmins);
+            return View(bosses);
         }
 
         public IActionResult Add()
@@ -49,7 +47,7 @@ namespace Web_Client.Areas.Admin.Controllers
         }
 
 
-        public async Task<Monster> GetByID(string id)
+        public async Task<Boss> GetByID(string id)
         {
             string access = Request.Cookies["access"];
             string refresh = Request.Cookies["refresh"];
@@ -58,21 +56,23 @@ namespace Web_Client.Areas.Admin.Controllers
             client.DefaultRequestHeaders.Add("refresh", refresh);
 
 
-            HttpResponseMessage response = await client.GetAsync(String.Format(Route.getByIDMonster, id));
+            HttpResponseMessage response = await client.GetAsync(String.Format(Route.getByIDBoss, id));
             string strData = await response.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true,
             };
-            Monster accountInfo = JsonSerializer.Deserialize<Monster>(strData, options);
+            Boss accountInfo = JsonSerializer.Deserialize<Boss>(strData, options);
 
             return accountInfo;
         }
 
         public async Task<IActionResult> Update(string id)
         {
-            var monster = await GetByID(id);
-            return View(monster);
+            var boss = await GetByID(id);
+            return View(boss);
         }
+
+        
     }
 }

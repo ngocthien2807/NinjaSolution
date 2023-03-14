@@ -2,6 +2,7 @@
 using System.Net;
 using System;
 using AppServices.BossRepo;
+using DTOs.BossDTOs;
 
 namespace API_Common.Controllers
 {
@@ -21,7 +22,7 @@ namespace API_Common.Controllers
         {
             try
             {
-                return StatusCode((int)HttpStatusCode.OK, BossManager.GetAllBoss(total));
+                return StatusCode((int)HttpStatusCode.OK, BossManager.GetAllBoss<ViewBoss>(total));
             }
             catch (Exception ex)
             {

@@ -65,6 +65,11 @@
         public static string updateMonster = $"{ApiUrl.BaseUrlAdmin}/{ApiController.Monster}/UpdateMonster";
         public static string deleteMonsterr = $"{ApiUrl.BaseUrlAdmin}/{ApiController.Monster}/DeleteMonster";
 
+        public static string getAllBossAdmin = $"{ApiUrl.BaseUrlAdmin}/{ApiController.Boss}/GetAllBoss";
+        public static string addBoss = $"{ApiUrl.BaseUrlAdmin}/{ApiController.Boss}/AddBoss";
+        public static string updateBoss = $"{ApiUrl.BaseUrlAdmin}/{ApiController.Boss}/UpdateBoss";
+        public static string deleteBoss = $"{ApiUrl.BaseUrlAdmin}/{ApiController.Boss}/DeleteBoss";
+
         #endregion
     }
 }
