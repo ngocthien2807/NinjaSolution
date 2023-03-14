@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace AppServices.BossRepo
 {
@@ -25,11 +26,18 @@ namespace AppServices.BossRepo
         {
             try
             {
+                if (context.Bosses.SingleOrDefault(b => b.BossId.Equals(boss.BossId)) != null)
+                {
+                    throw new Exception($"ID boss {boss.BossId} đã tồn tại");
+                }
+
                 context.Bosses.Add(boss);
-                return context.SaveChanges() == 1;
+                context.SaveChanges();
+                return true;
             }
             catch (Exception ex)
             {
+               
                 throw new Exception(ex.Message);
             }
         }

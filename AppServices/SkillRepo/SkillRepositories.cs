@@ -24,8 +24,14 @@ namespace AppServices.SkillRepo
         {
             try
             {
+                if (context.Skills.SingleOrDefault(ski => ski.SkillId.Equals(skill.SkillId)) != null)
+                {
+                    throw new Exception($"ID kỹ năng {skill.SkillId} đã tồn tại");
+                }
+
                 context.Skills.Add(skill);
-                return context.SaveChanges() == 1;
+                context.SaveChanges();
+                return true;
             }
             catch (Exception ex)
             {

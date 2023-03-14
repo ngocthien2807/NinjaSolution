@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace AppServices.ItemRepo
 {
@@ -24,8 +25,14 @@ namespace AppServices.ItemRepo
         {
             try
             {
+                if (context.Items.SingleOrDefault(it => it.ItemId.Equals(item.ItemId)) != null)
+                {
+                    throw new Exception($"ID vật phẩm {item.ItemId} đã tồn tại");
+                }
+
                 context.Items.Add(item);
-                return context.SaveChanges() == 1;
+                context.SaveChanges();
+                return true;
             }
             catch (Exception ex)
             {

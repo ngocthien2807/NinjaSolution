@@ -20,8 +20,14 @@ namespace AppServices.AbilityRepo
         {
             try
             {
+                if (context.Abilities.SingleOrDefault(abi => abi.AbilityId.Equals(ability.AbilityId)) != null)
+                {
+                    throw new Exception($"ID nội tại {ability.AbilityId} đã tồn tại");
+                }
+
                 context.Abilities.Add(ability);
-                return context.SaveChanges() == 1;
+                context.SaveChanges();
+                return true;
             }
             catch (Exception ex)
             {

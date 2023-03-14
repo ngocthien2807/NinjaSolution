@@ -29,13 +29,7 @@ namespace AppServices.CharacterRepo
         {
             try
             {
-                context.Characters.Add(character);
-                context.SaveChanges();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                if(context.Characters.SingleOrDefault(cha => cha.CharacterId.Equals(character.CharacterId)) != null)
+                if (context.Characters.SingleOrDefault(cha => cha.CharacterId.Equals(character.CharacterId)) != null)
                 {
                     throw new Exception($"ID nhân vật {character.CharacterId} đã tồn tại");
                 }
@@ -47,6 +41,14 @@ namespace AppServices.CharacterRepo
                         throw new Exception($"ID kỹ năng {skill.SkillId} đã tồn tại");
                     }
                 }
+
+                context.Characters.Add(character);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                
                 throw new Exception(ex.Message);
             }
         }

@@ -26,11 +26,18 @@ namespace AppServices.MonsterRepo
         {
             try
             {
+                if (context.Monsters.SingleOrDefault(mon => mon.MonsterId.Equals(monster.MonsterId)) != null)
+                {
+                    throw new Exception($"ID quái vật {monster.MonsterId} đã tồn tại");
+                }
+
                 context.Monsters.Add(monster);
-                return context.SaveChanges() == 1;
+                context.SaveChanges();
+                return true;
             }
             catch (Exception ex)
             {
+               
                 throw new Exception(ex.Message);
             }
         }
