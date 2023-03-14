@@ -21,7 +21,7 @@
         }
 
     .input-lable {
-        width: 120px;
+        width: 160px;
         height: 36px;
     }
 
@@ -50,6 +50,15 @@
     .wrapper {
         margin: auto !important;
     }
+
+    .input-texts {
+        display: flex;
+        margin-bottom: 16px;
+    }
+
+        .input-texts textarea {
+            width: 155px;
+        }
 </style>
 
 <span id="error" class="text-danger" hidden> </span>
@@ -85,7 +94,7 @@
                     </div>
                     <div class="product-info">
                         <div class="product-text">
-                            <h1 style="padding-top: 36px;">Thông tin boss</h1>
+                            <h1 style="padding: 21px 0 24px 0;">Thông tin boss</h1>
 
                             <div class="input-text">
                                 <div class="input-lable">
@@ -106,7 +115,7 @@
                                 </div>
                             </div>
 
-                            <div class="input-text">
+                            <div class="input-texts">
                                 <div class="input-lable">
                                     <label asp-for="Description">Mô tả</label>
                                 </div>
@@ -120,7 +129,7 @@
                                     <label asp-for="Health">Máu</label>
                                 </div>
                                 <div class="input-lable">
-                                    <input asp-for="Health" placeholder="Nhập chỉ số máu" required />
+                                    <input asp-for="Health" placeholder="Nhập máu" required />
                                 </div>
                             </div>
 
@@ -129,13 +138,13 @@
                                     <label asp-for="Speed">Tốc độ</label>
                                 </div>
                                 <div class="input-lable">
-                                    <input asp-for="Speed" placeholder="Nhập chỉ số tốc độ" required />
+                                    <input asp-for="Speed" placeholder="Nhập tốc độ" required />
                                 </div>
                             </div>
 
                             <div class="input-text">
                                 <div class="input-lable">
-                                    <label asp-for="CoinBonus">Phần thưởng xu</label>
+                                    <label asp-for="CoinBonus">Xu</label>
                                 </div>
                                 <div class="input-lable">
                                     <input asp-for="CoinBonus" placeholder="Nhập phần thưởng xu" required />
@@ -144,7 +153,7 @@
 
                             <div class="input-text">
                                 <div class="input-lable">
-                                    <label asp-for="ExperienceBonus">Phần thưởng kinh nghiệm</label>
+                                    <label asp-for="ExperienceBonus">Kinh nghiệm</label>
                                 </div>
                                 <div class="input-lable">
                                     <input asp-for="ExperienceBonus" placeholder="Nhập phần thưởng kinh nghiệm" required />
@@ -153,7 +162,7 @@
 
                             <div class="input-text">
                                 <div class="input-lable">
-                                    <label asp-for="PointSkillBonus">Phần thưởng máu</label>
+                                    <label asp-for="PointSkillBonus">Máu</label>
                                 </div>
                                 <div class="input-lable">
                                     <input asp-for="PointSkillBonus" placeholder="Nhập phần thưởng" required />
@@ -166,10 +175,15 @@
         </div>
     </div>
 
+    <div style="display:flex; justify-content:center">
     <div class="form-group">
         <input type="submit" value="Cập nhập" class="btn btn-primary" />
     </div>
-    <a class="btn-primary btn" type="button" asp-area="Admin" asp-controller="MonsterAdmin" asp-action="Index">Quay lại</a>
+    <div class="form-group">
+        <input type="submit" value="Cập nhập" class="btn btn-primary" />
+    </div>
+  @*  <a class="btn-primary btn" type="button" asp-area="Admin" asp-controller="MonsterAdmin" asp-action="Index">Quay lại</a>*@
+    </div>
 
 </form>
 
