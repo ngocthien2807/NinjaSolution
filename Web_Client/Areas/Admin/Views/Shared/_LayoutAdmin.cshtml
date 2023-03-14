@@ -29,7 +29,7 @@
             <div class="global-header__body">
                 <div class="global-header__title">
                     <h1 class="global-header__site-name">
-                        <a asp-controller="Home" asp-action="Index">
+                        <a asp-controller="HomeAdmin" asp-action="Index" asp-area="Admin">
                             <img src="~/assets/img/logo_web.png"
                                  alt="Hoc vien ninja" width="130">
                         </a>
@@ -40,8 +40,8 @@
                         <ul class="nav-global__list">
                             
                              <li class="nav-global__item" style="height: 57px;">
-                                <a asp-controller="Item" asp-action="Index"
-                                   class="nav-global__item--game"><span></span></a>
+                                <a asp-area="Admin" asp-controller="AccountAdmin" asp-action="Index"
+                                   class="nav-global__item--game"><span>Tài khoản</span></a>
                             </li>
                             <li class="nav-global__item" style="height: 57px;">
                                 <a asp-area="Admin" asp-controller="CharacterAdmin" asp-action="Index" 
@@ -49,26 +49,27 @@
                             </li>
 
                             <li class="nav-global__item" style="height: 57px;">
-                                <a asp-controller="Monster" asp-action="Index"
+                                <a asp-area="Admin" asp-controller="MonsterAdmin" asp-action="Index"
                                    class="nav-global__item--movie"><span>Quái vật</span></a>
                             </li>
 
                             <li class="nav-global__item" style="height: 57px;">
-                                <a asp-controller="Boss" asp-action="Index"
+                                <a asp-area="Admin" asp-controller="BossAdmin" asp-action="Index"
                                    class="nav-global__item--event"><span>Boss</span></a>
                             </li>
 
                             <li class="nav-global__item" style="height: 57px;">
-                                <a asp-controller="Ability" asp-action="Index"
+                                <a asp-area="Admin" asp-controller="AbilityAdmin" asp-action="Index"
                                    class="nav-global__item--game"><span>Nội tại</span></a>
                             </li>
 
                             <li class="nav-global__item" style="height: 57px;">
-                                <a asp-controller="Item" asp-action="Index"
+                                <a asp-area="Admin" asp-controller="ItemAdmin" asp-action="Index"
                                    class="nav-global__item--game"><span>Vật phẩm</span></a>
-                            </li>                
+                            </li>   
+                            
                             <li class="nav-global__item" style="height: 57px;">
-                                <a asp-controller="Item" asp-action="Index"
+                                <a asp-area="Admin" asp-controller="Item" asp-action="Index"
                                    class="nav-global__item--game"><span></span></a>
                             </li>
 
@@ -81,7 +82,7 @@
                                     </div>
                                 </div>
                                 <div style="margin-top: 68px; z-index: 1;" class="info-charac">
-                                    <div class="info-charac_items">
+                                    @*<div class="info-charac_items">
                                         <a asp-area="" asp-controller="Home" asp-action="Profile">
                                             <i class="fa-sharp fa-solid fa-user-tie"></i>
                                             <span>Xem thông tin</span>
@@ -91,6 +92,13 @@
                                         <a asp-area="" asp-controller="Home" asp-action="ChangePass">
                                             <i class="fa-sharp fa-solid fa-user-tie"></i>
                                             <span>Đổi mật khẩu</span>
+                                        </a>
+                                    </div>*@
+
+                                    <div class="info-charac_items">
+                                        <a asp-area="" asp-controller="Home" asp-action="ChangePass">
+                                            <i class="fa-sharp fa-solid fa-user-tie"></i>
+                                            <span>Chuyển trang player</span>
                                         </a>
                                     </div>
 

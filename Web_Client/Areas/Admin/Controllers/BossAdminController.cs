@@ -1,28 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DataAccess.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Net.Http.Headers;
 using System.Net.Http;
-using DTOs.CharacterDTOs;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Obj_Common;
-using DataAccess.Models;
-using Microsoft.AspNetCore.Http;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
 using System;
+using Obj_Common;
 
 namespace Web_Client.Areas.Admin.Controllers
 {
-    public class CharacterAdminController : Controller
+    public class BossAdminController : Controller
     {
         private readonly HttpClient client = null;
 
-        public static IWebHostEnvironment _hostingEnvironment;
-
-        public CharacterAdminController(IWebHostEnvironment environment)
+        public BossAdminController()
         {
-            _hostingEnvironment = environment;
             client = new HttpClient();
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
             client.DefaultRequestHeaders.Accept.Add(contentType);
@@ -37,26 +30,24 @@ namespace Web_Client.Areas.Admin.Controllers
             client.DefaultRequestHeaders.Add("refresh", refresh);
 
 
-            HttpResponseMessage response = await client.GetAsync(Route.getAllCharacterAdmin);
+            HttpResponseMessage response = await client.GetAsync(Route.getAllBossAdmin);
             string strData = await response.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true,
             };
-            List<ViewCharacterAdmin> characters = JsonSerializer.Deserialize<List<ViewCharacterAdmin>>(strData, options);
-            
-            return View(characters);
+            List<Boss> bosses = JsonSerializer.Deserialize<List<Boss>>(strData, options);
+
+            return View(bosses);
         }
 
         public IActionResult Add()
         {
-           
             return View();
         }
 
-        
-     
-        public async Task<ViewCharacterInfo> GetByID(string id)
+
+        public async Task<Boss> GetByID(string id)
         {
             string access = Request.Cookies["access"];
             string refresh = Request.Cookies["refresh"];
@@ -65,28 +56,23 @@ namespace Web_Client.Areas.Admin.Controllers
             client.DefaultRequestHeaders.Add("refresh", refresh);
 
 
-            HttpResponseMessage response = await client.GetAsync(String.Format(Route.getByIDCharacter, id));
+            HttpResponseMessage response = await client.GetAsync(String.Format(Route.getByIDBoss, id));
             string strData = await response.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true,
             };
-            ViewCharacterInfo characters = JsonSerializer.Deserialize<ViewCharacterInfo>(strData, options);
+            Boss accountInfo = JsonSerializer.Deserialize<Boss>(strData, options);
 
-            return characters;
-        }
-
-        public async Task<IActionResult> Detail(string id)
-        {
-            var character = await GetByID(id);
-            return View(character);
+            return accountInfo;
         }
 
         public async Task<IActionResult> Update(string id)
         {
-            var character = await GetByID(id);
-            return View(character);
+            var boss = await GetByID(id);
+            return View(boss);
         }
 
+        
     }
 }

@@ -22,10 +22,10 @@ namespace DataAccess.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public Role Role { get; set; }
-        public string Avatar { get; set; }
+        public string Avatar { get; set; } 
         public int Coin { get; set; }
         public int Experience { get; set; }
-        public int Level { get; set; }
+        public int Level { get; set; } = 1;
         public string CheckPoint { get; set; } = "map1_1";
         public int BossKill { get; set; }
         public int AmountSlotSkill { get; set; }

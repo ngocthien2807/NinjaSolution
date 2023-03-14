@@ -4,6 +4,7 @@ using System;
 using DataAccess.Models;
 using AppServices.BossRepo;
 using Microsoft.AspNetCore.Authorization;
+using DTOs.BossDTOs;
 
 namespace API_Admin.Controllers
 {
@@ -19,6 +20,19 @@ namespace API_Admin.Controllers
         public BossesController(BossRepositories bossManager)
         {
             BossManager = bossManager;
+        }
+
+        [HttpGet]
+        public IActionResult GetAllBoss()
+        {
+            try
+            {
+                return StatusCode((int)HttpStatusCode.OK, BossManager.GetAllBoss<Boss>(null, true));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.NotFound, ex.Message);
+            }
         }
 
         [HttpPost]

@@ -1,28 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DTOs.CharacterDTOs;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.IO;
 using System.Net.Http.Headers;
 using System.Net.Http;
-using DTOs.CharacterDTOs;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Obj_Common;
-using DataAccess.Models;
-using Microsoft.AspNetCore.Http;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
 using System;
+using Obj_Common;
+using DTOs.AccountDTOs;
 
 namespace Web_Client.Areas.Admin.Controllers
 {
-    public class CharacterAdminController : Controller
+    public class AccountAdminController : Controller
     {
         private readonly HttpClient client = null;
 
-        public static IWebHostEnvironment _hostingEnvironment;
 
-        public CharacterAdminController(IWebHostEnvironment environment)
+        public AccountAdminController()
         {
-            _hostingEnvironment = environment;
             client = new HttpClient();
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
             client.DefaultRequestHeaders.Accept.Add(contentType);
@@ -37,26 +35,25 @@ namespace Web_Client.Areas.Admin.Controllers
             client.DefaultRequestHeaders.Add("refresh", refresh);
 
 
-            HttpResponseMessage response = await client.GetAsync(Route.getAllCharacterAdmin);
+            HttpResponseMessage response = await client.GetAsync(Route.getAllAccountAdmin);
             string strData = await response.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true,
             };
-            List<ViewCharacterAdmin> characters = JsonSerializer.Deserialize<List<ViewCharacterAdmin>>(strData, options);
-            
-            return View(characters);
+            List<ViewAccountAdmin> accountAdmins = JsonSerializer.Deserialize<List<ViewAccountAdmin>>(strData, options);
+
+            return View(accountAdmins);
         }
 
         public IActionResult Add()
         {
-           
+
             return View();
         }
 
-        
-     
-        public async Task<ViewCharacterInfo> GetByID(string id)
+
+        public async Task<ViewAccountInfo> GetByID(string id)
         {
             string access = Request.Cookies["access"];
             string refresh = Request.Cookies["refresh"];
@@ -65,28 +62,22 @@ namespace Web_Client.Areas.Admin.Controllers
             client.DefaultRequestHeaders.Add("refresh", refresh);
 
 
-            HttpResponseMessage response = await client.GetAsync(String.Format(Route.getByIDCharacter, id));
+            HttpResponseMessage response = await client.GetAsync(String.Format(Route.detailAccount, id));
             string strData = await response.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true,
             };
-            ViewCharacterInfo characters = JsonSerializer.Deserialize<ViewCharacterInfo>(strData, options);
+            ViewAccountInfo accountInfo = JsonSerializer.Deserialize<ViewAccountInfo>(strData, options);
 
-            return characters;
+            return accountInfo;
         }
 
         public async Task<IActionResult> Detail(string id)
         {
-            var character = await GetByID(id);
-            return View(character);
+            var accountInfo = await GetByID(id);
+            return View(accountInfo);
         }
-
-        public async Task<IActionResult> Update(string id)
-        {
-            var character = await GetByID(id);
-            return View(character);
-        }
-
     }
 }
+  

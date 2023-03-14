@@ -1,6 +1,8 @@
-﻿using DataAccess;
+﻿using AutoMapper;
+using DataAccess;
 using DataAccess.Models;
 using DTOs.CharacterDTOs;
+using DTOs.MonsterDTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,9 +14,12 @@ namespace AppServices.MonsterRepo
     {
         private readonly LienminhnhangiaContext context;
 
-        public MonsterRepositories(LienminhnhangiaContext context)
+        IMapper mapper;
+
+        public MonsterRepositories(LienminhnhangiaContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
         public bool AddMonster(Monster monster)
@@ -60,15 +65,24 @@ namespace AppServices.MonsterRepo
             }
         }
 
-        public List<Monster> GetAllMonster(int? total)
+        public List<T> GetAllMonster<T>(int? total, bool isAdmin = false)
         {
             try
             {
+                var monsters = context.Monsters.Where(i => i.Delete == false).ToList();
+
+                if (isAdmin)
+                {
+                    return monsters.Cast<T>().ToList();
+                }
+
+                var viewMonsters = mapper.Map<List<Monster>, List<ViewMonster>>(monsters);
+
                 if (total != null)
                 {
-                    return context.Monsters.Where(i => i.Delete == false).Take((int)total).ToList(); ;
+                    viewMonsters = viewMonsters.Take((int)total).ToList(); 
                 }
-                return context.Monsters.Where(i => i.Delete == false).ToList();
+                return viewMonsters.Cast<T>().ToList();
 
             }
             catch (Exception ex)

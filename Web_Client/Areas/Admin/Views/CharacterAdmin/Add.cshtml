@@ -286,6 +286,8 @@
     <div style="text-align:center;" class="form-group">
         <input type="submit" value="Thêm mới" class="btn btn-primary" />
     </div>
+    <a class="btn-primary btn" type="button" asp-area="Admin" asp-controller="CharacterAdmin" asp-action="Index">Quay lại</a>
+
 </form>
 
 <script>
@@ -304,7 +306,7 @@
             }
 
             $.ajax({
-                url: '@Url.ActionLink("UploadImage","CharacterAdmin")', // point to server-side controller method
+                url: '@Url.ActionLink("Upload","UploadImage")', // point to server-side controller method
                 type: "POST",
                 processData: false,
                 contentType: false,

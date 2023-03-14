@@ -126,7 +126,10 @@ namespace Web_Client.Controllers
 
             new resetCookie().reset(_httpContextAccessor, response);
 
-            return View(profile);
+            if(profile != null) { return View(profile);}
+
+            return RedirectToAction(nameof(Login));
+            
         }
 
         public async Task<IActionResult> UpdateProfile(UpdateProfile updateProfile)

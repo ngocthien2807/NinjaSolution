@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace API_Admin.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/Admin/[controller]/[action]")]
     [ApiController]
     [Authorize(Roles = "Admin")]
     public class SkillsController : ControllerBase

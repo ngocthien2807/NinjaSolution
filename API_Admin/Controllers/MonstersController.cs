@@ -4,10 +4,11 @@ using System;
 using DataAccess.Models;
 using AppServices.MonsterRepo;
 using Microsoft.AspNetCore.Authorization;
+using DTOs.MonsterDTOs;
 
 namespace API_Admin.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/Admin/[controller]/[action]")]
     [ApiController]
     [Authorize(Roles = "Admin")]
     public class MonstersController : ControllerBase
@@ -17,6 +18,19 @@ namespace API_Admin.Controllers
         public MonstersController(MonsterRepositories monsterManager)
         {
             MonsterManager = monsterManager;
+        }
+
+        [HttpGet]
+        public IActionResult GetAllMonster()
+        {
+            try
+            {
+                return StatusCode((int)HttpStatusCode.OK, MonsterManager.GetAllMonster<Monster>(null, true));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.NotFound, ex.Message);
+            }
         }
 
         [HttpPost]

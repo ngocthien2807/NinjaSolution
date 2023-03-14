@@ -2,6 +2,7 @@
 using System.Net;
 using System;
 using AppServices.MonsterRepo;
+using DTOs.MonsterDTOs;
 
 namespace API_Common.Controllers
 {
@@ -21,7 +22,7 @@ namespace API_Common.Controllers
         {
             try
             {
-                return StatusCode((int)HttpStatusCode.OK, MonsterManager.GetAllMonster(total));
+                return StatusCode((int)HttpStatusCode.OK, MonsterManager.GetAllMonster<ViewMonster>(total));
             }
             catch (Exception ex)
             {

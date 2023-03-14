@@ -1,5 +1,8 @@
-﻿using DataAccess;
+﻿using AutoMapper;
+using DataAccess;
 using DataAccess.Models;
+using DTOs.BossDTOs;
+using DTOs.MonsterDTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,10 +13,12 @@ namespace AppServices.BossRepo
     public class BossRepositories
     {
         private readonly LienminhnhangiaContext context;
+        IMapper mapper;
 
-        public BossRepositories(LienminhnhangiaContext context)
+        public BossRepositories(LienminhnhangiaContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
         public bool AddBoss(Boss boss)
@@ -60,16 +65,25 @@ namespace AppServices.BossRepo
             }
         }
 
-        public List<Boss> GetAllBoss(int? total)
+        public List<T> GetAllBoss<T>(int? total, bool isAdmin = false)
         {
-           
             try
             {
-                if(total != null) 
-                    return context.Bosses.Where(boss => boss.Delete == false).Take((int)total).ToList();
+                var bosses = context.Bosses.Where(boss => boss.Delete == false).ToList();
 
-                return context.Bosses.Where(boss => boss.Delete == false).ToList();
-                
+                if (isAdmin)
+                {
+                    return bosses.Cast<T>().ToList();
+                }
+
+                var viewBosses = mapper.Map<List<Boss>, List<ViewBoss>>(bosses);
+
+                if (total != null)
+                {
+                    viewBosses = viewBosses.Take((int)total).ToList();
+                }
+
+                return viewBosses.Cast<T>().ToList();
             }
             catch (Exception ex)
             {

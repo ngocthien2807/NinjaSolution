@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Http;
 @using Obj_Common;
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
-@model IEnumerable<DTOs.CharacterDTOs.ViewCharacterAdmin>
+@model IEnumerable<DTOs.AccountDTOs.ViewAccountAdmin>
 @{
     HttpContext httpContext = HttpContextAccessor.HttpContext;
     string access = httpContext.Request.Cookies["access"];
@@ -54,14 +54,14 @@
             });
         });
 
-        ShowAllCharacter();
+        ShowAllAccount();
 
-        function ShowAllCharacter() {
+        function ShowAllAccount() {
             var content = '';
 
             $("#myTable").html("");
 
-            var url = "@Route.getAllCharacterAdmin";
+            var url = "@Route.getAllAccountAdmin";
 
             $.ajax({
                 type: "GET",
@@ -75,28 +75,23 @@
                         content += `
                                     <tr>
                                         <td style="text-align: left; ">
-                                            <img src="${v.linkImage}" class="mr-3" alt=""> ${v.name}
+                                                <img src="${v.avatar}" class="mr-3" alt=""> ${v.name}
                                         </td>
-                                        <td> ${v.health}  </td>
-                                        <td> ${v.chakra}  </td>
-                                        <td> ${v.damage}  </td>
-                                        <td> ${v.speed}   </td>
+                                        <td> ${v.username}  </td>
+                                        <td> ${v.coin}  </td>
+                                        <td> ${v.experience}  </td>
+                                        <td> ${v.level}   </td>
                                         <td>
-                                            <a href="/Admin/CharacterAdmin/Detail/${v.characterId}">
-                                                    <img src="/admin/img/info.png" />
+                                            <a href="/Admin/AccountAdmin/Detail/${v.accountId}">
+                                                <img src="/admin/img/info.png" />
                                             </a>
-                                            <a href="/Admin/CharacterAdmin/Update/${v.characterId}">
-                                                <img src="/admin/img/edit.png" />
-                                            </a>
-                                            <img class="delete" characterId="${v.characterId}" src="/admin/img/delete.png" />
+                                            <img class="delete" accountId="${v.accountId}" src="/admin/img/delete.png" />
                                         </td>
                                     </tr>
                                     `
                     });
 
                     $('#myTable').html(content);
-
-
                 },
                 error: function (xhr, status, error) {
                     console.log(xhr.responseText);
@@ -106,36 +101,26 @@
 
         $("table").on("click", ".delete", function () {
 
-            var characterId = $(this).attr('characterId');
+            var accountId = $(this).attr('accountId');
 
-            var url = "@Route.deleteCharacter/";
+            var url = "@Route.deleteAccount/";
 
             $.ajax({
-                url: url + characterId,
+                url: url + accountId,
                 type: "delete",
                 headers: {
                     "Authorization": "Bearer " + "@access",
                     "refresh": "@refresh"
                 },
                 success: function (result, status, xhr) {
-                    ShowAllCharacter();
+                    ShowAllAccount();
                 },
                 error: function (xhr, status, error) {
                     console.log(xhr)
                 }
             });
         });
-
-        //let $modal = $("#myModal");
-        //$modal.draggable({
-        //    handle: ".modal-header",
-        //});
-        //$modal.resizable();
     });
-
-    
-
-
 
 </script>
 
@@ -148,7 +133,7 @@
                         <input class="col-8" type="text" id="keyword" placeholder="Tìm kiếm theo tên ...">
 
                         <a class="btn-primary btn" type="button" id="mybtn" style=" margin: 0px  0px 2px 10.8rem;"
-                           asp-area="Admin" asp-controller="CharacterAdmin" asp-action="Add">Thêm mới</a>
+                           asp-area="Admin" asp-controller="AccountAdmin" asp-action="Add">Thêm mới</a>
                     </div>
 
 
@@ -158,15 +143,14 @@
                                 <thead style="background-color: #f1f1f1;">
                                     <tr>
                                         <th>Tên</th>
-                                        <th>Máu</th>
-                                        <th>Năng lượng</th>
-                                        <th>Sát thương</th>
-                                        <th>Tốc độ</th>
+                                        <th>Tên đăng nhập</th>
+                                        <th>Số xu</th>
+                                        <th>Kinh nghiệm</th>
+                                        <th>Level</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody id="myTable">
-                                    
                                 </tbody>
                             </table>
                         </div>
@@ -178,26 +162,3 @@
         </div>
     </div>
 </div>
-
-
-
-@*
-<div class="messess">
-
-			<div class="modal-footer">
-				<div class="modal-inner">
-					<h3>Thông báo</h3>
-					<p>Bạn có muốn lưu thông tin này không</p>
-					<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
-					<button id="loadpage" type="button" class="btn btn-primary">Lưu</button>
-				</div>
-			</div>
-
-
-			</div>*@
-
-
-
-
-
-
