@@ -1,25 +1,22 @@
-﻿using DTOs.CharacterDTOs;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+﻿using DTOs.AccountDTOs;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.IO;
 using System.Net.Http.Headers;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System;
 using Obj_Common;
-using DTOs.AccountDTOs;
+using DataAccess.Models;
 
 namespace Web_Client.Areas.Admin.Controllers
 {
-    public class AccountAdminController : Controller
+    public class MonsterAdminController : Controller
     {
         private readonly HttpClient client = null;
 
 
-        public AccountAdminController()
+        public MonsterAdminController()
         {
             client = new HttpClient();
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
@@ -35,25 +32,24 @@ namespace Web_Client.Areas.Admin.Controllers
             client.DefaultRequestHeaders.Add("refresh", refresh);
 
 
-            HttpResponseMessage response = await client.GetAsync(Route.getAllAccountAdmin);
+            HttpResponseMessage response = await client.GetAsync(Route.getAllMonsterAdmin);
             string strData = await response.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true,
             };
-            List<ViewAccountAdmin> accountAdmins = JsonSerializer.Deserialize<List<ViewAccountAdmin>>(strData, options);
+            List<Monster> monsterAdmins = JsonSerializer.Deserialize<List<Monster>>(strData, options);
 
-            return View(accountAdmins);
+            return View(monsterAdmins);
         }
 
         public IActionResult Add()
         {
-
             return View();
         }
 
 
-        public async Task<ViewAccountInfo> GetByID(string id)
+        public async Task<Monster> GetByID(string id)
         {
             string access = Request.Cookies["access"];
             string refresh = Request.Cookies["refresh"];
@@ -62,22 +58,27 @@ namespace Web_Client.Areas.Admin.Controllers
             client.DefaultRequestHeaders.Add("refresh", refresh);
 
 
-            HttpResponseMessage response = await client.GetAsync(String.Format(Route.detailAccount, id));
+            HttpResponseMessage response = await client.GetAsync(String.Format(Route.getByIDMonster, id));
             string strData = await response.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true,
             };
-            ViewAccountInfo accountInfo = JsonSerializer.Deserialize<ViewAccountInfo>(strData, options);
+            Monster accountInfo = JsonSerializer.Deserialize<Monster>(strData, options);
 
             return accountInfo;
         }
 
+        public async Task<IActionResult> Update(string id)
+        {
+            var monster = await GetByID(id);
+            return View(monster);
+        }
+
         public async Task<IActionResult> Detail(string id)
         {
-            var accountInfo = await GetByID(id);
-            return View(accountInfo);
+            var monster = await GetByID(id);
+            return View(monster);
         }
     }
 }
-  

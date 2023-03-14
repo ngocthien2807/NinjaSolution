@@ -52,7 +52,7 @@
         public static string getAllCharacterAdmin = $"{ApiUrl.BaseUrlAdmin}/{ApiController.Character}/GetAllCharacter";
         public static string addCharacter = $"{ApiUrl.BaseUrlAdmin}/{ApiController.Character}/AddCharacter";
         public static string updateCharacter = $"{ApiUrl.BaseUrlAdmin}/{ApiController.Character}/UpdateCharacter";
-        public static string deleteCharacter = $"{ApiUrl.BaseUrlAdmin}/{ApiController.Character}/DeleteCharacterD";
+        public static string deleteCharacter = $"{ApiUrl.BaseUrlAdmin}/{ApiController.Character}/DeleteCharacter";
 
 
         public static string getAllAccountAdmin = $"{ApiUrl.BaseUrlAdmin}/{ApiController.Account}/GetAllAccount";
@@ -60,6 +60,10 @@
         public static string addAccount = $"{ApiUrl.BaseUrlAdmin}/{ApiController.Account}/AddAccount";
         public static string detailAccount = $"{ApiUrl.BaseUrlAdmin}/{ApiController.Account}/GetbyID/" + "{0}";
 
+        public static string getAllMonsterAdmin = $"{ApiUrl.BaseUrlAdmin}/{ApiController.Monster}/GetAllMonster";
+        public static string addMonster = $"{ApiUrl.BaseUrlAdmin}/{ApiController.Monster}/AddMonster";
+        public static string updateMonster = $"{ApiUrl.BaseUrlAdmin}/{ApiController.Monster}/UpdateMonster";
+        public static string deleteMonsterr = $"{ApiUrl.BaseUrlAdmin}/{ApiController.Monster}/DeleteMonster";
 
         #endregion
     }
