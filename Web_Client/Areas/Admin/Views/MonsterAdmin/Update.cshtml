@@ -21,7 +21,7 @@
         }
 
     .input-lable {
-        width: 120px;
+        width: 160px;
         height: 36px;
     }
 
@@ -50,6 +50,16 @@
     .wrapper {
         margin: auto !important;
     }
+
+
+    .input-texts {
+        display: flex;
+        margin-bottom: 16px;
+    }
+
+        .input-texts textarea {
+            width: 155px;
+        }
 </style>
 
 <span id="error" class="text-danger" hidden> </span>
@@ -85,7 +95,7 @@
                     </div>
                     <div class="product-info">
                         <div class="product-text">
-                            <h1 style="padding-top: 36px;">Thông tin nhân vật</h1>
+                            <h1 style="padding: 21px 0 24px 0;">Thông tin nhân vật</h1>
 
                             <div class="input-text">
                                 <div class="input-lable">
@@ -106,7 +116,7 @@
                                 </div>
                             </div>
 
-                            <div class="input-text">
+                            <div class="input-texts">
                                 <div class="input-lable">
                                     <label asp-for="Description">Mô tả </label>
                                 </div>
@@ -159,10 +169,17 @@
         </div>
     </div>
 
+
+
+    <div style="display:flex; justify-content:center;">
     <div class="form-group">
         <input type="submit" value="Cập nhập" class="btn btn-primary" />
     </div>
-    <a class="btn-primary btn" type="button" asp-area="Admin" asp-controller="MonsterAdmin" asp-action="Index">Quay lại</a>
+    <div class="form-group">
+        <input type="submit" value="Cập nhập" class="btn btn-primary" />
+    </div>
+    </div>
+   @* <a class="btn-primary btn" type="button" asp-area="Admin" asp-controller="MonsterAdmin" asp-action="Index">Quay lại</a>*@
 
 </form>
 
