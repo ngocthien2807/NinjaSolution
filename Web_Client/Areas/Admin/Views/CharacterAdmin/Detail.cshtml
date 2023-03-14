@@ -22,9 +22,10 @@
         }
 
     .input-lable {
-        width: 120px;
+        width: 130px;
         height: 36px;
     }
+    
 
         .input-lable label {
             height: 125px;
@@ -72,7 +73,7 @@
                 </div>
                 <div class="product-info">
                     <div class="product-text">
-                        <h1 style="padding-top: 36px;">Thông tin nhân vật</h1>
+                        <h1 style="padding: 21px 0 24px 0;">Thông tin nhân vật</h1>
 
                         <div class="input-text">
                             <div class="input-lable">
@@ -173,7 +174,7 @@
                     </div>
                     <div class="product-info">
                         <div class="product-text">
-                            <h1 style="padding-top: 36px;">Thông tin kỹ năng @(++i)</h1>
+                            <h1 style="padding: 21px 0 24px 0;">Thông tin kỹ năng</h1>
 
                             <div class="input-text">
                                 <div class="input-lable">
@@ -259,7 +260,13 @@
         </div>
     }
 </div>
+  
 
-<a class="btn-primary btn" type="button" asp-area="Admin" asp-controller="CharacterAdmin" asp-action="Index">Quay lại</a>
-<a class="btn-primary btn" type="button" asp-area="Admin" asp-controller="CharacterAdmin" asp-action="Update" asp-route-id="@Model.CharacterId">Cập nhật</a>
-
+<div style="display:flex; justify-content:center;">
+    <div class="form-group">
+        <input type="submit" value="Cập nhập" class="btn btn-primary" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Cập nhập" class="btn btn-primary" />
+    </div>
+</div>

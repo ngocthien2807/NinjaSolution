@@ -21,9 +21,11 @@
         }
 
     .input-lable {
-        width: 120px;
+        width: 160px;
         height: 36px;
     }
+
+
 
         .input-lable label {
             height: 125px;
@@ -49,6 +51,15 @@
 
     .wrapper {
         margin: auto !important;
+    }
+
+    .input-texts{
+        display:flex;
+        margin-bottom:16px;
+    }
+
+    .input-texts textarea{
+        width: 155px;
     }
 </style>
 
@@ -85,32 +96,32 @@
                     </div>
                     <div class="product-info">
                         <div class="product-text">
-                            <h1 style="padding-top: 36px;">Thông tin nhân vật</h1>
+                            <h1 style="padding-top: 36px; padding-bottom:25px;">Thông tin nhân vật</h1>
 
                             <div class="input-text">
                                 <div class="input-lable">
                                     <label asp-for="CharacterId">ID nhân vật </label>
                                 </div>
                                 <div class="input-lable">
-                                    <input asp-for="CharacterId" placeholder="Nhập ID nhân vật" required />
+                                    <input asp-for="CharacterId" placeholder="Nhập ID" required />
                                 </div>
 
                             </div>
                             <div class="input-text">
                                 <div class="input-lable">
-                                    <label asp-for="Name">Tên nhân vật </label>
+                                    <label asp-for="Name">Tên</label>
                                 </div>
                                 <div class="input-lable">
-                                    <input asp-for="Name" placeholder="Nhập tên nhân vật" required />
+                                    <input asp-for="Name" placeholder="Nhập tên" required />
                                 </div>
 
                             </div>
-                            <div class="input-text">
+                            <div class="input-texts">
                                 <div class="input-lable">
                                     <label asp-for="Description">Mô tả </label>
                                 </div>
                                 <div class="input-lable">
-                                    <textarea asp-for="Description" required></textarea>
+                                    <textarea placeholder="Nhập mô tả" asp-for="Description" required></textarea>
                                 </div>
 
                             </div>
@@ -120,7 +131,7 @@
                                     <label asp-for="Health">Máu </label>
                                 </div>
                                 <div class="input-lable">
-                                    <input asp-for="Health" placeholder="Nhập chỉ số máu nhân vật" required />
+                                    <input asp-for="Health" placeholder="Nhập chỉ số máu" required />
                                 </div>
 
                             </div>
@@ -130,7 +141,7 @@
                                     <label asp-for="Chakra">Năng lượng </label>
                                 </div>
                                 <div class="input-lable">
-                                    <input asp-for="Chakra" placeholder="Nhập chỉ số năng lượng nhân vật" required />
+                                    <input asp-for="Chakra" placeholder="Nhập năng lượng" required />
                                 </div>
 
                             </div>
@@ -140,7 +151,7 @@
                                     <label asp-for="Damage">Sát thương </label>
                                 </div>
                                 <div class="input-lable">
-                                    <input asp-for="Damage" placeholder="Nhập chỉ số sát thương nhân vật" required />
+                                    <input asp-for="Damage" placeholder="Nhập sát thương" required />
                                 </div>
 
                             </div>
@@ -150,7 +161,7 @@
                                     <label asp-for="Speed">Tốc độ </label>
                                 </div>
                                 <div class="input-lable">
-                                    <input asp-for="Speed" placeholder="Nhập chỉ số tốc độ nhân vật" required />
+                                    <input asp-for="Speed" placeholder="Nhập tốc độ" required />
                                 </div>
 
                             </div>
@@ -185,14 +196,14 @@
                         </div>
                         <div class="product-info">
                             <div class="product-text">
-                                <h1 style="padding-top: 36px;">Thông tin kỹ năng @(i + 1)</h1>
+                                <h1 style="padding: 21px 0 24px 0;">Thông tin kỹ năng</h1>
 
                                 <div class="input-text">
                                     <div class="input-lable">
                                         <label for="SkillId_@i">ID kỹ năng</label>
                                     </div>
                                     <div class="input-lable">
-                                        <input id="SkillId_@i" name="Skill_SkillId" placeholder="Nhập ID kỹ năng" required />
+                                        <input id="SkillId_@i" name="Skill_SkillId" placeholder="Nhập ID" required />
                                     </div>
                                 </div>
                                 <div class="input-text">
@@ -200,16 +211,16 @@
                                         <label for="SkillName_@i">Tên kỹ năng</label>
                                     </div>
                                     <div class="input-lable">
-                                        <input id="SkillName_@i" name="Skill_Name" placeholder="Nhập tên kỹ năng" required />
+                                        <input id="SkillName_@i" name="Skill_Name" placeholder="Nhập" required />
                                     </div>
 
                                 </div>
-                                <div class="input-text">
+                                <div class="input-texts">
                                     <div class="input-lable">
                                         <label for="SkillDescription_@i">Mô tả </label>
                                     </div>
                                     <div class="input-lable">
-                                        <textarea id="SkillDescription_@i" name="Skill_Description" required></textarea>
+                                        <textarea placeholder="Nhập mô tả" id="SkillDescription_@i" name="Skill_Description" required></textarea>
                                     </div>
 
                                 </div>
@@ -220,7 +231,7 @@
                                         <label for="SkillChakra_@i">Năng lượng </label>
                                     </div>
                                     <div class="input-lable">
-                                        <input id="SkillChakra_@i" name="Skill_Chakra" placeholder="Nhập chỉ số năng lượng kỹ năng" required />
+                                        <input id="SkillChakra_@i" name="Skill_Chakra" placeholder="Nhập năng lượng" required />
                                     </div>
 
                                 </div>
@@ -230,7 +241,7 @@
                                         <label for="SkillDamage_@i">Sát thương </label>
                                     </div>
                                     <div class="input-lable">
-                                        <input id="SkillDamage_@i" name="Skill_Damage" placeholder="Nhập chỉ số sát thương kỹ năng" required />
+                                        <input id="SkillDamage_@i" name="Skill_Damage" placeholder="Nhập sát thương" required />
                                     </div>
 
                                 </div>
@@ -240,7 +251,7 @@
                                         <label for="SkillCoin_@i">Giá bán</label>
                                     </div>
                                     <div class="input-lable">
-                                        <input id="SkillCoin_@i" name="Skill_Coin" placeholder="Nhập giá bán kỹ năng " required />
+                                        <input id="SkillCoin_@i" name="Skill_Coin" placeholder="Nhập giá kỹ năng " required />
                                     </div>
 
                                 </div>
@@ -250,7 +261,7 @@
                                         <label for="SkillUpdateCoin_@i">Giá nâng cấp</label>
                                     </div>
                                     <div class="input-lable">
-                                        <input id="SkillUpdateCoin_@i" name="Skill_UpdateCoin" placeholder="Nhập giá nâng cấp kỹ năng " required />
+                                        <input id="SkillUpdateCoin_@i" name="Skill_UpdateCoin" placeholder="Nhập giá nâng cấp " required />
                                     </div>
 
                                 </div>
@@ -272,7 +283,7 @@
         }
     </div>
 
-    <div class="form-group">
+    <div style="text-align:center;" class="form-group">
         <input type="submit" value="Thêm mới" class="btn btn-primary" />
     </div>
 </form>

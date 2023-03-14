@@ -21,21 +21,30 @@
             width: 96%;
         }
 
+    .input-texts {
+        display: flex;
+        margin-bottom: 16px;
+    }
+
     .input-lable {
-        width: 120px;
+        width: 160px;
         height: 36px;
     }
 
-        .input-lable label {
-            height: 125px;
-            margin: 0 0 0 38px;
-            font-family: 'Playfair Display', serif;
-            color: #8d8d8d;
-            line-height: 1.7em;
-            font-size: 15px;
-            font-weight: lighter;
-            overflow: hidden;
-        }
+    .input-texts textarea {
+        width: 155px;
+    }
+
+    .input-lable label {
+        height: 125px;
+        margin: 0 0 0 38px;
+        font-family: 'Playfair Display', serif;
+        color: #8d8d8d;
+        line-height: 1.7em;
+        font-size: 15px;
+        font-weight: lighter;
+        overflow: hidden;
+    }
 
     .input-input input {
         border: 0px;
@@ -86,7 +95,7 @@
                     </div>
                     <div class="product-info">
                         <div class="product-text">
-                            <h1 style="padding-top: 36px;">Thông tin nhân vật</h1>
+                            <h1 style="padding: 21px 0 24px 0;">Thông tin nhân vật</h1>
 
                             <div class="input-text">
                                 <div class="input-lable">
@@ -107,7 +116,7 @@
                                 </div>
 
                             </div>
-                            <div class="input-text">
+                            <div class="input-texts">
                                 <div class="input-lable">
                                     <label asp-for="Description">Mô tả </label>
                                 </div>
@@ -166,7 +175,7 @@
 
 
         @*thông tin kỹ năng*@
-        @foreach(var skil in Model.Skills)
+        @foreach (var skil in Model.Skills)
         {
             <div class="pokemon-list__header">
                 <div class="content" style="margin-top: 20px;">
@@ -187,7 +196,7 @@
                         </div>
                         <div class="product-info">
                             <div class="product-text">
-                                <h1 style="padding-top: 36px;">Thông tin kỹ năng @(++i)</h1>
+                                <h1 style="padding: 21px 0 24px 0;">Thông tin kỹ năng</h1>
 
                                 <div class="input-text">
                                     <div class="input-lable">
@@ -207,7 +216,7 @@
                                     </div>
 
                                 </div>
-                                <div class="input-text">
+                                <div class="input-texts">
                                     <div class="input-lable">
                                         <label asp-for="@skil.Description">Mô tả </label>
                                     </div>
@@ -274,11 +283,16 @@
         }
     </div>
 
-    <div class="form-group">
-        <input type="submit" value="Cập nhập" class="btn btn-primary" />
+    <div style="display:flex; justify-content:center;">
+        <div class="form-group">
+            <input type="submit" value="Cập nhập" class="btn btn-primary" />
+        </div>
+        <div class="form-group">
+            @*<input type="submit" value="Quay lại" class="btn btn-danger" />*@
+            <a class="btn-primary btn" type="button" asp-area="Admin" asp-controller="CharacterAdmin" asp-action="Index">Quay lại</a>
+        </div>
+        @*  <a class="btn-primary btn" type="button" asp-area="Admin" asp-controller="CharacterAdmin" asp-action="Index">Quay lại</a>*@
     </div>
-    <a class="btn-primary btn" type="button" asp-area="Admin" asp-controller="CharacterAdmin" asp-action="Index">Quay lại</a>
-
 </form>
 
 <script>
